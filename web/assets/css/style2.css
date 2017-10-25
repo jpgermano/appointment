@@ -1,0 +1,19 @@
+.black-bg {
+    background: #FF906E;
+    border-bottom: 1px solid #c9aa5f;
+}
+
+.green-panel {
+    text-align: center;
+    background: #424A5D;
+}
+
+.calendar-month-header {
+    background: #424A5D;
+}
+
+.stock .current-price {
+    background: #424A5D;
+    padding: 10px;
+}
+

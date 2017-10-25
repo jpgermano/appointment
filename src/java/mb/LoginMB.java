@@ -49,7 +49,7 @@ public class LoginMB {
             if (funcionario != null) {
                 setCargo("Funcionário Comum");
                 setNome(funcionario.getTbPessoa().getNmePessoa());
-                ret = "/Funcionario/MenuFuncionario";
+                ret = "/Funcionario/index";
             }
          /*   if (funcionario != null && cargo.equals("Programador")) {
                 setCargo("Funcionario Administrador");
@@ -64,7 +64,7 @@ public class LoginMB {
     public void deslogar() throws IOException {
         HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         sessao.invalidate();
-        FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
         System.out.println("Sucesso");
     }
 

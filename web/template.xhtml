@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+        <link href="/PrjMontadoras/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link rel="icon" href="/PrjMontadoras/resources/imgs/carro.png" type="image/ico" />
+        <title>Appointment</title>
+    </h:head>
+
+    <h:body>
+        <div id="top" class="top">
+            <ui:insert name="cabecalho">
+                <p:panel header="Appointment - Sistema para reuniões" footer="Versão: 1.0 - UniCEUB - Centro Universitário de Brasília">  
+                    <h:outputText value="Bem vindo ao sistema !"/>
+                </p:panel> 
+            </ui:insert>
+        </div>
+        <div>
+            <div id="left">
+                <ui:insert name="menu">
+                    <h:form>
+                        <p:menu style="width:270px">
+                            <p:submenu label="Página Inicial">
+                                <p:menuitem value="Reuniões passadas" icon="ui-icon-calculator" url="/ReunioesPassadas.xhtml"/>
+                            </p:submenu>
+                            <p:submenu label="Reuniões">
+                                <p:menuitem value="Nova Reunião" icon="ui-icon-contact" url="/Montadora.xhtml"/>
+                            </p:submenu>
+                            <p:submenu label="Configurações">
+                                <p:menuitem value="Ver configurações" icon="ui-icon-star" url="/faces/DispCores.xhtml"/>
+                            </p:submenu>
+                            <p:submenu label="Compromissos">
+                                <p:menuitem value="Ver compromissos" icon="ui-icon-zoomout" url="/faces/Arvore.xhtml"/>
+                            </p:submenu>              
+                        </p:menu>
+                    </h:form>
+                    <p:ajaxStatus>  
+                        <f:facet name="start">  
+                            <p:graphicImage value="/resources/imgs/loading.gif" />  
+                        </f:facet>  
+                        <f:facet name="complete">  
+                            <h:outputText value="" />  
+                        </f:facet>  
+                    </p:ajaxStatus>  
+                </ui:insert>
+            </div>
+            <div id="content" class="left_content">
+                <ui:insert name="conteudo">
+                    <p:panel header="Appointment">  
+                        <h:outputText value="Seja Bem vindo!"/>
+                    </p:panel>
+                </ui:insert>
+            </div>
+        </div>
+    </h:body>
+</html>

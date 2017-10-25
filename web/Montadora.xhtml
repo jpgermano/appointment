@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="conteudo">
+        <p:panel header="Manter Tabela de Montadoras">
+            <h:form id="frmConsulta">  
+                <p:growl id="msgs" showDetail="true"/>  
+                <p:panelGrid columns="3">
+                    <p:column>
+                        Sigla da Montadora:
+                    </p:column>
+                    <p:column>
+                        <p:inputText size="15" maxlength="30" value="#{montadoraMB.sglMontadora}"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandButton value="Consultar" actionListener="#{montadoraMB.filtrar}" update=":frmConsulta:msgs, :frmConsulta:dtbConsulta" icon="ui-icon-search"/>
+                    </p:column>
+                </p:panelGrid>
+
+                <p:dataTable id="dtbConsulta" var="reg" value="#{montadoraMB.tbMontadoras}" tableStyle="width:auto;" paginator="true" rows="5">  
+
+                    <p:column headerText="Identificador" style="width:100px">  
+                        <h:outputText value="#{reg.idtMontadora}" />  
+                    </p:column>  
+
+                    <p:column headerText="Sigla" style="width:100px">  
+                        <h:outputText value="#{reg.sglMontadora}" />  
+                    </p:column>  
+                    
+                    <p:column headerText="Nome" style="width:300px">  
+                        <h:outputText value="#{reg.nmeMontadora}" />  
+                    </p:column>  
+
+                    <p:column headerText="Opera��o" style="width:200px">  
+                        <p:panelGrid columns="2">  
+                            <p:column>
+                                <p:commandButton id="btnEditar" update=":frmEditar:pngEditar" oncomplete="PF('dlgEditarView').show()" icon="ui-icon-pencil" value="Editar">  
+                                    <f:setPropertyActionListener value="#{reg}" target="#{montadoraMB.selecionado}" />  
+                                </p:commandButton>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton id="btnExcluir" update=":frmExcluir:dlgConfExclusao" oncomplete="PF('dlgConfExclusaoView').show()" icon="ui-icon-trash" value="Excluir">  
+                                    <f:setPropertyActionListener value="#{reg}" target="#{montadoraMB.selecionado}" />  
+                                </p:commandButton>  
+                            </p:column>
+                        </p:panelGrid>  
+                    </p:column>  
+
+                </p:dataTable>  
+
+                <p:commandButton id="btnNovo" update=":frmEditar:pngEditar" oncomplete="PF('dlgEditarView').show()" icon="ui-icon-plusthick" value="Novo" actionListener="#{montadoraMB.novo}" ajax="true"/> 
+            </h:form> 
+
+            <p:dialog header="Editar" widgetVar="dlgEditarView" resizable="false" id="dlgEditar"  
+                      showEffect="fade" hideEffect="explode" modal="true">  
+                <h:form id="frmEditar">
+                    <p:panelGrid id="pngEditar" columns="2" style="margin:0 auto;">  
+                        <p:column>
+                            <h:outputText value="Identificador:" />  
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="idtMontadora" value="#{montadoraMB.selecionado.idtMontadora}" disabled="true" size="5"/>  
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Sigla:" />  
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="sglMontadora" value="#{montadoraMB.selecionado.sglMontadora}" size="15" required="true" requiredMessage="Sigla � um campo obrigat�rio!"/>  
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Nome:" />  
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="nmeMontadora" value="#{montadoraMB.selecionado.nmeMontadora}" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
+                        </p:column>
+                        <p:column>
+                            <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{montadoraMB.salvar}" ajax="true"/>  
+                        </p:column>
+                        <p:column>
+                            <p:commandButton id="btnFechar" value="Fechar" icon="ui-icon-close" onclick="dlgEditarView.hide()"/>  
+                        </p:column>
+                    </p:panelGrid>  
+                </h:form>
+            </p:dialog>  
+
+            <h:form id="frmExcluir">
+                <p:confirmDialog id="dlgConfExclusao" message="Tem certeza que deseja excluir (#{montadoraMB.selecionado.sglMontadora}/#{montadoraMB.selecionado.nmeMontadora})?"  
+                                 header="Exclus�o de Registro" severity="alert" widgetVar="dlgConfExclusaoView">  
+                    <p:commandButton id="btnConfirm" value="Sim" update=":frmConsulta:dtbConsulta, :frmConsulta:msgs" oncomplete="PF('dlgConfExclusaoView').hide()" actionListener="#{montadoraMB.excluir}" />  
+                    <p:commandButton id="btnDecline" value="N�o" onclick="PF('dlgConfExclusaoView').hide()" type="button" />   
+                </p:confirmDialog> 
+            </h:form>
+
+        </p:panel>
+    </ui:define>
+
+</ui:composition>

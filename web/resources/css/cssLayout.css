@@ -1,0 +1,26 @@
+#top {
+    position: relative;
+    color: white;
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+    background-color: #68dff0;
+}
+
+#left {
+    float: left;
+    padding: 5px;
+    width: 280px;
+    background-color: #FFFFFF;
+}
+
+.left_content {
+    padding: 5px;
+    margin-left: 290px;
+    background-color: #FFFFFF;
+}
+
+.ui-panel-titlebar{
+    height: 25px;
+}
+
+
