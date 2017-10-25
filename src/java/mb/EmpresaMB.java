@@ -2,14 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.uniceub.fsw.mb;
+package mb;
 
 import dao.TbEmpresaDAO;
+import java.util.List;
 import model.TbEmpresa;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
 
 /**
  *
@@ -20,6 +22,7 @@ import javax.faces.context.FacesContext;
 public class EmpresaMB {
 
     private TbEmpresa selecionado;
+    private List<TbEmpresa> tbEmpresas;
     private String nmeEmpresa;
     
     /**
@@ -95,6 +98,20 @@ public class EmpresaMB {
      */
     public void setnmeEmpresa(String nmeEmpresa) {
         this.nmeEmpresa = nmeEmpresa;
+    }
+
+    /**
+     * @return the tbEmpresas
+     */
+    public List<TbEmpresa> getTbEmpresas() {
+        return tbEmpresas;
+    }
+
+    /**
+     * @param tbEmpresas the tbEmpresas to set
+     */
+    public void setTbEmpresas(List<TbEmpresa> tbEmpresas) {
+        this.tbEmpresas = tbEmpresas;
     }
 
 }

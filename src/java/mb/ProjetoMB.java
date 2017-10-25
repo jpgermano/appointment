@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.uniceub.fsw.mb;
+package mb;
 
 import dao.TbProjetoDAO;
+import java.util.List;
 import model.TbProjeto;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -20,6 +21,7 @@ import javax.faces.context.FacesContext;
 public class ProjetoMB {
 
     private TbProjeto selecionado;
+    private List<TbProjeto> tbProjetos;
     private String nmeProjeto;
     
     /**
@@ -95,6 +97,20 @@ public class ProjetoMB {
      */
     public void setnmeProjeto(String nmeProjeto) {
         this.nmeProjeto = nmeProjeto;
+    }
+
+    /**
+     * @return the tbProjetos
+     */
+    public List<TbProjeto> getTbProjetos() {
+        return tbProjetos;
+    }
+
+    /**
+     * @param tbProjetos the tbProjetos to set
+     */
+    public void setTbProjetos(List<TbProjeto> tbProjetos) {
+        this.tbProjetos = tbProjetos;
     }
 
 }

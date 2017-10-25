@@ -19,8 +19,6 @@ public class FiltrarPaginas implements PhaseListener {
         String pagina = contexto.getViewRoot().getViewId();
 
         System.out.println(">>> Página: " + pagina);
-		
-		//Acrescentei um comentário para teste commit
 
         if (pagina.substring(1).contains("/")) {  // Verificar se esta dentro de uma pasta
             HttpSession sessao = (HttpSession) contexto.getExternalContext().getSession(false);

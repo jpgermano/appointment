@@ -2,14 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.uniceub.fsw.mb;
+package mb;
 
 import dao.TbSetorDAO;
+import java.util.List;
 import model.TbSetor;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
 
 /**
  *
@@ -20,6 +22,7 @@ import javax.faces.context.FacesContext;
 public class SetorMB {
 
     private TbSetor selecionado;
+    private List<TbSetor> tbSetores;
     private String nmeSetor;
     
     /**
@@ -33,7 +36,7 @@ public class SetorMB {
 
     public void filtrar() {
         TbSetorDAO dao = new TbSetorDAO();
-        setTbSetors(dao.consultarPorNme(getnmeSetor()));
+        setTbSetores(dao.consultarPorNme(getnmeSetor()));
     }
 
     public void novo() {
@@ -95,6 +98,20 @@ public class SetorMB {
      */
     public void setnmeSetor(String nmeSetor) {
         this.nmeSetor = nmeSetor;
+    }
+
+    /**
+     * @return the tbSetores
+     */
+    public List<TbSetor> getTbSetores() {
+        return tbSetores;
+    }
+
+    /**
+     * @param tbSetores the tbSetores to set
+     */
+    public void setTbSetores(List<TbSetor> tbSetores) {
+        this.tbSetores = tbSetores;
     }
 
 }
