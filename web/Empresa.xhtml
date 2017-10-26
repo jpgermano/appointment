@@ -13,20 +13,20 @@
                 <p:growl id="msgs" showDetail="true"/>  
                 <p:panelGrid columns="3">
                     <p:column>
-                        Data da reunião:
+                        Empresa:
                     </p:column>
                     <p:column>
                         <p:inputText size="15" maxlength="30" value="#{empresaMB.nmeEmpresa}"/>
                     </p:column>
                     <p:column>
-                        <p:commandButton value="Consultar" actionListener="#{reuniaoMB.filtrar()}" update=":frmConsulta:msgs, :frmConsulta:dtbConsulta" icon="ui-icon-search"/>
+                        <p:commandButton value="Consultar" actionListener="#{empresaMB.filtrar()}" update=":frmConsulta:msgs, :frmConsulta:dtbConsulta" icon="ui-icon-search"/>
                     </p:column>
                 </p:panelGrid>
                 <br></br>
                 <p:dataTable id="dtbConsulta" var="reg" value="#{empresaMB.tbEmpresas}" tableStyle="width:auto;" paginator="true" rows="5">  
 
                     <p:column headerText="Identificador" style="width:100px">  
-                        <h:outputText value="#{reg}" />  
+                        <h:outputText value="#{reg.idtEmpresa}" />  
                     </p:column>  
                     
                     <p:column headerText="Nome" style="width:300px">  
@@ -119,7 +119,7 @@
                         </p:column>                        
 
                         <p:column>
-                            <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{empresaMB.salvar}" ajax="true"/>  
+                            <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{montadoraMB.salvar}" ajax="true"/>  
                         </p:column>
                         <p:column>
                             <p:commandButton id="btnFechar" value="Fechar" icon="ui-icon-close" onclick="dlgEditarView.hide()"/>  
@@ -138,3 +138,4 @@
         </p:panel>
     </ui:define>
 </ui:composition>
+
