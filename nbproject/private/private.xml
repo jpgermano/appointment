@@ -7,6 +7,13 @@
             <file>file:/C:/Users/Higo/Documents/appointment/src/java/dao/HibernateUtil.java</file>
             <file>file:/C:/Users/Higo/Documents/appointment/src/java/hibernate.cfg.xml</file>
             <file>file:/C:/Users/Higo/Documents/appointment/web/ReunioesPassadas.xhtml</file>
+            <file>file:/C:/Users/Higo/Documents/appointment/web/Modelo.xhtml</file>
+            <file>file:/C:/Users/Higo/Documents/appointment/src/java/mb/LoginMB.java</file>
+            <file>file:/C:/Users/Higo/Documents/appointment/src/java/mb/SetorMB.java</file>
+            <file>file:/C:/Users/Higo/Documents/appointment/src/java/mb/ProjetoMB.java</file>
+            <file>file:/C:/Users/Higo/Documents/appointment/web/Empresa.xhtml</file>
+            <file>file:/C:/Users/Higo/Documents/appointment/src/java/dao/TbReuniaoDAO.java</file>
+            <file>file:/C:/Users/Higo/Documents/appointment/src/java/dao/BaseDAO.java</file>
         </group>
     </open-files>
 </project-private>

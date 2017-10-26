@@ -8,68 +8,60 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="conteudo">
-        <p:panel header="Reunioes Passadas">
+        <p:panel header="Pessoas">
             <h:form id="frmConsulta">  
                 <p:growl id="msgs" showDetail="true"/>  
                 <p:panelGrid columns="3">
                     <p:column>
-                        Empresa:
+                        Pessoa:
                     </p:column>
                     <p:column>
-                        <p:inputText size="15" maxlength="30" value="#{empresaMB.nmeEmpresa}"/>
+                        <p:inputText size="15" maxlength="30" value="#{pessoaMB.nmePessoa}"/>
                     </p:column>
                     <p:column>
-                        <p:commandButton value="Consultar" actionListener="#{empresaMB.filtrar()}" update=":frmConsulta:msgs, :frmConsulta:dtbConsulta" icon="ui-icon-search"/>
+                        <p:commandButton value="Consultar" actionListener="#{pessoaMB.filtrar()}" update=":frmConsulta:msgs, :frmConsulta:dtbConsulta" icon="ui-icon-search"/>
                     </p:column>
                 </p:panelGrid>
                 <br></br>
-                <p:dataTable id="dtbConsulta" var="reg" value="#{empresaMB.tbEmpresas}" tableStyle="width:auto;" paginator="true" rows="5">  
+                <p:dataTable id="dtbConsulta" var="reg" value="#{pessoaMB.tbPessoas}" tableStyle="width:auto;" paginator="true" rows="5">  
 
                     <p:column headerText="Identificador" style="width:100px">  
-                        <h:outputText value="#{reg.idtEmpresa}" />  
+                        <h:outputText value="#{reg.idtPessoa}" />  
                     </p:column>  
                     
                     <p:column headerText="Nome" style="width:300px">  
-                        <h:outputText value="#{reg.nmeEmpresa}" />  
+                        <h:outputText value="#{reg.nmePessoa}" />  
                     </p:column>
-                    
-                    <p:column headerText="CNPJ" style="width:300px">  
-                        <h:outputText value="#{reg.cnpjEmpresa}" />  
-                    </p:column>  
-                    
+                         
                     <p:column headerText="Endereco" style="width:300px">  
-                        <h:outputText value="#{reg.endEmpresa}" />  
+                        <h:outputText value="#{reg.endPessoa}" />  
                     </p:column>  
-                    
-                    <p:column headerText="Area" style="width:300px">  
-                        <h:outputText value="#{reg.nmeAreaEmpresa}" />  
-                    </p:column>  
-                    
+                                       
                     <p:column headerText="Telefone" style="width:300px">  
-                        <h:outputText value="#{reg.telEmpresa}" />  
+                        <h:outputText value="#{reg.telPessoa}" />  
                     </p:column>
                     
                     <p:column headerText="Email" style="width:300px">  
-                        <h:outputText value="#{reg.emlEmpresa}" />  
+                        <h:outputText value="#{reg.emlPessoa}" />  
                     </p:column> 
 
                     <p:column headerText="Operacao" style="width:200px">  
                         <p:panelGrid columns="2">  
                             <p:column>
                                 <p:commandButton id="btnEditar" update=":frmEditar:pngEditar" oncomplete="PF('dlgEditarView').show()" icon="ui-icon-pencil" value="Editar">  
-                                    <f:setPropertyActionListener value="#{reg}" target="#{empresaMB.selecionado}" />  
+                                    <f:setPropertyActionListener value="#{reg}" target="#{pessoaMB.selecionado}" />  
                                 </p:commandButton>
                             </p:column>
                             <p:column>
                                 <p:commandButton id="btnExcluir" update=":frmExcluir:dlgConfExclusao" oncomplete="PF('dlgConfExclusaoView').show()" icon="ui-icon-trash" value="Excluir">  
-                                    <f:setPropertyActionListener value="#{reg}" target="#{empresaMB.selecionado}" />  
+                                    <f:setPropertyActionListener value="#{reg}" target="#{pessoaMB.selecionado}" />  
                                 </p:commandButton>  
                             </p:column>
                         </p:panelGrid>  
                     </p:column>  
                         
                 </p:dataTable>
-                <p:commandButton id="btnNovo" update=":frmEditar:pngEditar" oncomplete="PF('dlgEditarView').show()" icon="ui-icon-plusthick" value="Novo" actionListener="#{empresaMB.novo}" ajax="true"/>
+                <p:commandButton id="btnNovo" update=":frmEditar:pngEditar" oncomplete="PF('dlgEditarView').show()" icon="ui-icon-plusthick" value="Novo" actionListener="#{pessoaMB.novo}" ajax="true"/>
             </h:form>
             <p:dialog header="Editar" widgetVar="dlgEditarView" resizable="false" id="dlgEditar"  
                       showEffect="fade" hideEffect="explode" modal="true">  
@@ -79,47 +71,35 @@
                             <h:outputText value="Identificador:" />  
                         </p:column>
                         <p:column>
-                            <p:inputText id="idtEmpresa" value="#{empresaMB.selecionado.idtEmpresa}" disabled="true" size="5"/>  
+                            <p:inputText id="idtPessoa" value="#{pessoaMB.selecionado.idtPessoa}" disabled="true" size="5"/>  
                         </p:column>
                         <p:column>
                             <h:outputText value="Nome:" />  
                         </p:column>
                         <p:column>
-                            <p:inputText id="nmeEmpresa" value="#{empresaMB.selecionado.nmeEmpresa}" size="50" required="true" requiredMessage="Nome é um campo obrigatório!"/>  
-                        </p:column>
-                        <p:column>  
-                            <h:outputText value="CNPJ" />  
-                        </p:column>  
-                        <p:column>
-                            <p:inputText id="cnpjEmpresa" value="#{empresaMB.selecionado.cnpjEmpresa}" size="50"/>  
+                            <p:inputText id="nmeEmpresa" value="#{pessoaMB.selecionado.nmePessoa}" size="50" required="true" requiredMessage="Nome é um campo obrigatório!"/>  
                         </p:column>
                         <p:column>  
                             <h:outputText value="Endereco" />  
                         </p:column>  
                         <p:column>
-                            <p:inputText id="endEmpresa" value="#{empresaMB.selecionado.endEmpresa}" size="50"/>  
-                        </p:column>                    
-                        <p:column>  
-                            <h:outputText value="Area" />  
-                        </p:column>  
-                        <p:column>
-                            <p:inputText id="nmeAreaEmpresa" value="#{empresaMB.selecionado.idtEmpresa}"  size="50"/>  
-                        </p:column>                    
+                            <p:inputText id="endEmpresa" value="#{pessoaMB.selecionado.endPessoa}" size="50"/>  
+                        </p:column>                                 
                         <p:column>  
                             <h:outputText value="Telefone" />  
                         </p:column>
                         <p:column>
-                            <p:inputText id="telEmpresa" value="#{empresaMB.selecionado.telEmpresa}" size="50"/>  
+                            <p:inputText id="telEmpresa" value="#{pessoaMB.selecionado.telPessoa}" size="50"/>  
                         </p:column>                    
                         <p:column>  
                             <h:outputText value="Email" />  
                         </p:column> 
                         <p:column>
-                            <p:inputText id="emlEmpresa" value="#{empresaMB.selecionado.emlEmpresa}"  size="50"/>  
+                            <p:inputText id="emlEmpresa" value="#{pessoaMB.selecionado.emlPessoa}"  size="50"/>  
                         </p:column>                        
 
                         <p:column>
-                            <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{empresaMB.salvar}" ajax="true"/>  
+                            <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{pessoaMB.salvar}" ajax="true"/>  
                         </p:column>
                         <p:column>
                             <p:commandButton id="btnFechar" value="Fechar" icon="ui-icon-close" onclick="dlgEditarView.hide()"/>  
@@ -129,9 +109,9 @@
             </p:dialog>  
 
             <h:form id="frmExcluir">
-                <p:confirmDialog id="dlgConfExclusao" message="Tem certeza que deseja excluir (#{empresaMB.selecionado.nmeEmpresa}/#{empresaMB.selecionado.endEmpresa})?"  
+                <p:confirmDialog id="dlgConfExclusao" message="Tem certeza que deseja excluir (#{pessoaMB.selecionado.nmePessoa}/#{pessoaMB.selecionado.endPessoa})?"  
                                  header="Exclusão de Registro" severity="alert" widgetVar="dlgConfExclusaoView">  
-                    <p:commandButton id="btnConfirm" value="Sim" update=":frmConsulta:dtbConsulta, :frmConsulta:msgs" oncomplete="PF('dlgConfExclusaoView').hide()" actionListener="#{empresaMB.excluir}" />  
+                    <p:commandButton id="btnConfirm" value="Sim" update=":frmConsulta:dtbConsulta, :frmConsulta:msgs" oncomplete="PF('dlgConfExclusaoView').hide()" actionListener="#{pessoaMB.excluir}" />  
                     <p:commandButton id="btnDecline" value="Não" onclick="PF('dlgConfExclusaoView').hide()" type="button" />   
                 </p:confirmDialog> 
             </h:form>

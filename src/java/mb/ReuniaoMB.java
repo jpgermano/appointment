@@ -3,10 +3,11 @@
  * and open the template in the editor.
  */
 package mb;
+import dao.*;
+import model.*;
 
-import dao.TbReuniaoDAO;
 import java.util.List;
-import model.TbReuniao;
+import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -21,7 +22,16 @@ import javax.faces.context.FacesContext;
 public class ReuniaoMB {
 
     private TbReuniao selecionado;
+    private TbReuniao novo;
     private List<TbReuniao> tbReunioes;
+    private List<TbAssunto> tbAssuntos;
+    private List<TbProjeto> tbProjetos;
+    private List<TbPauta> tbPautas;
+    private Integer idtAssuntoPar; // Usado na combo de montadora nos parâmetros de consulta
+    private Integer idtProjetoPar; // Usado na combo de modelo nos parâmetros de consulta
+    private Integer idtPautaPar; // Usado na combo de versão nos parâmetros de consulta    
+    private List<TaParticipantes> taParticipantes;    
+    
     private String nmeLocalReuniao;
     
     /**
@@ -30,6 +40,20 @@ public class ReuniaoMB {
     public ReuniaoMB() {
         selecionado = new TbReuniao();
         nmeLocalReuniao="";
+        idtAssuntoPar = 0; 
+        idtProjetoPar = 0;
+        idtPautaPar = 0;
+        
+        TbAssuntoDAO dao = new TbAssuntoDAO();
+        tbAssuntos = dao.consultarTodos();
+        TbProjetoDAO tbProjetoDAO = new TbProjetoDAO();
+        tbProjetoDAO.consultarTodos();
+        TbPautaDAO tbPautaDAO = new TbPautaDAO();
+        tbPautaDAO.consultarTodos();
+        
+      
+      
+        
         filtrar();
     }
 
@@ -112,5 +136,105 @@ public class ReuniaoMB {
     public void setTbReunioes(List<TbReuniao> tbReunioes) {
         this.tbReunioes = tbReunioes;
     }
+
+    /**
+     * @return the tbAssuntos
+     */
+    public List<TbAssunto> getTbAssuntos() {
+        return tbAssuntos;
+    }
+
+    /**
+     * @param tbAssuntos the tbAssuntos to set
+     */
+    public void setTbAssuntos(List<TbAssunto> tbAssuntos) {
+        this.tbAssuntos = tbAssuntos;
+    }
+
+    /**
+     * @return the tbProjetos
+     */
+    public List<TbProjeto> getTbProjetos() {
+        return tbProjetos;
+    }
+
+    /**
+     * @param tbProjetos the tbProjetos to set
+     */
+    public void setTbProjetos(List<TbProjeto> tbProjetos) {
+        this.tbProjetos = tbProjetos;
+    }
+
+    /**
+     * @return the tbPautas
+     */
+    public List<TbPauta> getTbPautas() {
+        return tbPautas;
+    }
+
+    /**
+     * @param tbPautas the tbPautas to set
+     */
+    public void setTbPautas(List<TbPauta> tbPautas) {
+        this.tbPautas = tbPautas;
+    }
+
+    /**
+     * @return the idtAssuntoPar
+     */
+    public Integer getIdtAssuntoPar() {
+        return idtAssuntoPar;
+    }
+
+    /**
+     * @param idtAssuntoPar the idtAssuntoPar to set
+     */
+    public void setIdtAssuntoPar(Integer idtAssuntoPar) {
+        this.idtAssuntoPar = idtAssuntoPar;
+    }
+
+    /**
+     * @return the idtProjetoPar
+     */
+    public Integer getIdtProjetoPar() {
+        return idtProjetoPar;
+    }
+
+    /**
+     * @param idtProjetoPar the idtProjetoPar to set
+     */
+    public void setIdtProjetoPar(Integer idtProjetoPar) {
+        this.idtProjetoPar = idtProjetoPar;
+    }
+
+    /**
+     * @return the idtPautaPar
+     */
+    public Integer getIdtPautaPar() {
+        return idtPautaPar;
+    }
+
+    /**
+     * @param idtPautaPar the idtPautaPar to set
+     */
+    public void setIdtPautaPar(Integer idtPautaPar) {
+        this.idtPautaPar = idtPautaPar;
+    }
+
+    /**
+     * @return the taParticipantes
+     */
+    public List<TaParticipantes> getTaParticipantes() {
+        return taParticipantes;
+    }
+
+    /**
+     * @param taParticipantes the taParticipantes to set
+     */
+    public void setTaParticipantes(List<TaParticipantes> taParticipantes) {
+        this.taParticipantes = taParticipantes;
+    }
+    
+    
 
 }
