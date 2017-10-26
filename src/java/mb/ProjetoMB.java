@@ -25,7 +25,7 @@ public class ProjetoMB {
     private String nmeProjeto;
     
     /**
-     * Creates a new instance of ProdutoMB
+     * Creates a new instance of ProjetoMB
      */
     public ProjetoMB() {
         selecionado = new TbProjeto();

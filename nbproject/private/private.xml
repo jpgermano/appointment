@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ra21485532/Downloads/appointment/src/java/model/TbReuniao.java</file>
-            <file>file:/C:/Users/ra21485532/Downloads/appointment/web/ReunioesPassadas.xhtml</file>
-            <file>file:/C:/Users/ra21485532/Downloads/appointment/web/Funcionario/index.xhtml</file>
-            <file>file:/C:/Users/ra21485532/Downloads/appointment/web/login.xhtml</file>
-            <file>file:/C:/Users/ra21485532/Downloads/appointment/web/template.xhtml</file>
-            <file>file:/C:/Users/ra21485532/Downloads/appointment/web/resources/css/cssLayout.css</file>
-            <file>file:/C:/Users/ra21485532/Downloads/appointment/web/Montadora.xhtml</file>
+            <file>file:/C:/Users/Higo/Documents/appointment/src/java/mb/ReuniaoMB.java</file>
+            <file>file:/C:/Users/Higo/Documents/appointment/src/java/dao/HibernateUtil.java</file>
+            <file>file:/C:/Users/Higo/Documents/appointment/src/java/hibernate.cfg.xml</file>
+            <file>file:/C:/Users/Higo/Documents/appointment/web/ReunioesPassadas.xhtml</file>
         </group>
     </open-files>
 </project-private>

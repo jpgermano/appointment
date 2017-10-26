@@ -26,7 +26,7 @@ public class SetorMB {
     private String nmeSetor;
     
     /**
-     * Creates a new instance of ProdutoMB
+     * Creates a new instance of SetorMB
      */
     public SetorMB() {
         selecionado = new TbSetor();

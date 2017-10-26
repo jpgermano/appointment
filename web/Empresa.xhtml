@@ -129,9 +129,9 @@
             </p:dialog>  
 
             <h:form id="frmExcluir">
-                <p:confirmDialog id="dlgConfExclusao" message="Tem certeza que deseja excluir (#{montadoraMB.selecionado.sglMontadora}/#{montadoraMB.selecionado.nmeMontadora})?"  
+                <p:confirmDialog id="dlgConfExclusao" message="Tem certeza que deseja excluir (#{empresaMB.selecionado.nmeEmpresa}/#{empresaMB.selecionado.endEmpresa})?"  
                                  header="Exclusão de Registro" severity="alert" widgetVar="dlgConfExclusaoView">  
-                    <p:commandButton id="btnConfirm" value="Sim" update=":frmConsulta:dtbConsulta, :frmConsulta:msgs" oncomplete="PF('dlgConfExclusaoView').hide()" actionListener="#{montadoraMB.excluir}" />  
+                    <p:commandButton id="btnConfirm" value="Sim" update=":frmConsulta:dtbConsulta, :frmConsulta:msgs" oncomplete="PF('dlgConfExclusaoView').hide()" actionListener="#{empresaMB.excluir}" />  
                     <p:commandButton id="btnDecline" value="Não" onclick="PF('dlgConfExclusaoView').hide()" type="button" />   
                 </p:confirmDialog> 
             </h:form>

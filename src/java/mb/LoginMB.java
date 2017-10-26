@@ -28,7 +28,7 @@ public class LoginMB {
     private String cargo;
 
     /**
-     * Creates a new instance of ControleAcessoMB
+     * Creates a new instance of LoginMB
      */
     public LoginMB() {
 

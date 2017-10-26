@@ -22,26 +22,26 @@ public class ReuniaoMB {
 
     private TbReuniao selecionado;
     private List<TbReuniao> tbReunioes;
-    private String nmeReuniao;
+    private String nmeLocalReuniao;
     
     /**
-     * Creates a new instance of ProdutoMB
+     * Creates a new instance of ReuniaoMB
      */
     public ReuniaoMB() {
         selecionado = new TbReuniao();
-        nmeReuniao="";
+        nmeLocalReuniao="";
         filtrar();
     }
 
     public void filtrar() {
         TbReuniaoDAO dao = new TbReuniaoDAO();
-        setTbReunioes(dao.consultarPorNme(getnmeReuniao()));
+        setTbReunioes(dao.consultarPorNmeLocal(getnmeLocalReuniao()));
     }
 
     public void novo() {
         setSelecionado(new TbReuniao());
         getSelecionado().setIdtReuniao(0);
-        nmeReuniao="";
+        nmeLocalReuniao="";
     }
 
     public void salvar() {
@@ -86,17 +86,17 @@ public class ReuniaoMB {
     }
 
     /**
-     * @return the nmeReuniao
+     * @return the nmeLocalReuniao
      */
-    public String getnmeReuniao() {
-        return nmeReuniao;
+    public String getnmeLocalReuniao() {
+        return nmeLocalReuniao;
     }
 
     /**
-     * @param nmeReuniao the nmeReuniao to set
+     * @param nmeLocalReuniao the nmeLocalReuniao to set
      */
-    public void setnmeReuniao(String nmeReuniao) {
-        this.nmeReuniao = nmeReuniao;
+    public void setnmeLocalReuniao(String nmeLocalReuniao) {
+        this.nmeLocalReuniao = nmeLocalReuniao;
     }
 
     /**
