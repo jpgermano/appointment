@@ -14,14 +14,14 @@ import org.hibernate.Query;
  */
 public class TbPautaDAO extends BaseDAO<TbPauta> {
     
-        public List<TbPauta> consultarPorReuniaoIdt(Integer idtReuniao, Integer idtPauta) {
+        public List<TbPauta> consultarPorReuniaoTxt(Integer idtReuniao, String txtPauta) {
         List<TbPauta> lista;
         Query qy = hib.createQuery("SELECT obj FROM TbPauta obj "
-                + "WHERE (0=? OR tbReuniao.idtReuniao=?) AND idtPauta (0=? OR tbPauta.idtPauta=?)"
-                + "ORDER BY tbReuniao.nmeLocalReuniao, idtPauta");
+                + "WHERE (0=? OR tbReuniao.idtReuniao=?) AND txtPauta LIKE ?"
+                + "ORDER BY tbReuniao.nmeLocalReuniao, txtPauta");
         qy.setInteger(0, idtReuniao);
         qy.setInteger(1, idtReuniao);
-        qy.setInteger(2, idtPauta);
+        qy.setString(2, "%" + txtPauta + "%");
         lista = qy.list();
         return lista;
     }

@@ -6,14 +6,13 @@ package mb;
 
 import dao.TbPautaDAO;
 import dao.TbReuniaoDAO;
-import java.util.List;
 import model.TbPauta;
 import model.TbReuniao;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
 
 /**
  *
@@ -24,33 +23,33 @@ import javax.faces.context.FacesContext;
 public class PautaMB {
 
     private TbPauta selecionado;
-    private List<TbPauta> TbPautas;
-    private Integer idtPauta;
-    private Integer idtReuniaoPar;
-    private List<TbReuniao> tbReunioes;
-    private Integer idtReuniao;
-    
+    private List<TbPauta> tbPautas;
+    private String txtPauta;
+    private Integer idtReuniaoPar; // Usado na combo de parâmetros de consulta
+    private List<TbReuniao> tbReuniaos;
+    private Integer idtReuniao; // Usado na combo de novo e edição
+
     /**
      * Creates a new instance of PautaMB
      */
     public PautaMB() {
         selecionado = new TbPauta();
-        idtPauta = 0;
+        txtPauta = "";
         idtReuniaoPar = 0;
         TbReuniaoDAO dao = new TbReuniaoDAO();
-        tbReunioes = dao.consultarTodos();
+        tbReuniaos = dao.consultarTodos();
         filtrar();
     }
 
     public void filtrar() {
         TbPautaDAO dao = new TbPautaDAO();
-        setTbPautas(dao.consultarPorReuniaoIdt(getIdtReuniao(), idtPauta));
+        setTbPautas(dao.consultarPorReuniaoTxt(getIdtReuniaoPar(), txtPauta));
     }
 
     public void novo() {
         setSelecionado(new TbPauta());
         getSelecionado().setIdtPauta(0);
-        idtReuniao=0;
+        idtReuniao = 0;
     }
 
     public void salvar() {
@@ -93,37 +92,53 @@ public class PautaMB {
      * @param selecionado the selecionado to set
      */
     public void setSelecionado(TbPauta selecionado) {
+        if (selecionado.getTbReuniao() != null) {
+            idtReuniao = selecionado.getTbReuniao().getIdtReuniao();
+        }
         this.selecionado = selecionado;
     }
 
-
-
     /**
-     * @return the TbPautas
+     * @return the tbPautas
      */
     public List<TbPauta> getTbPautas() {
-        return TbPautas;
+        return tbPautas;
     }
 
     /**
-     * @param TbPautas the TbPautas to set
+     * @param tbPautas the tbPautas to set
      */
-    public void setTbPautas(List<TbPauta> TbPautas) {
-        this.TbPautas = TbPautas;
+    public void setTbPautas(List<TbPauta> tbPautas) {
+        this.tbPautas = tbPautas;
+    }
+
+
+    /**
+     * @return the idtReuniao
+     */
+    public Integer getIdtReuniao() {
+        return idtReuniao;
     }
 
     /**
-     * @return the idtPauta
+     * @param idtReuniao the idtReuniao to set
      */
-    public Integer getIdtPauta() {
-        return idtPauta;
+    public void setIdtReuniao(Integer idtReuniao) {
+        this.idtReuniao = idtReuniao;
     }
 
     /**
-     * @param idtPauta the idtPauta to set
+     * @return the tbReuniaos
      */
-    public void setIdtPauta(Integer idtPauta) {
-        this.idtPauta = idtPauta;
+    public List<TbReuniao> getTbReuniaos() {
+        return tbReuniaos;
+    }
+
+    /**
+     * @param tbReuniaos the tbReuniaos to set
+     */
+    public void setTbReuniaos(List<TbReuniao> tbReuniaos) {
+        this.tbReuniaos = tbReuniaos;
     }
 
     /**
@@ -141,31 +156,16 @@ public class PautaMB {
     }
 
     /**
-     * @return the tbReunioes
+     * @return the txtPauta
      */
-    public List<TbReuniao> getTbReunioes() {
-        return tbReunioes;
+    public String getTxtPauta() {
+        return txtPauta;
     }
 
     /**
-     * @param tbReunioes the tbReunioes to set
+     * @param txtPauta the txtPauta to set
      */
-    public void setTbReunioes(List<TbReuniao> tbReunioes) {
-        this.tbReunioes = tbReunioes;
+    public void setTxtPauta(String txtPauta) {
+        this.txtPauta = txtPauta;
     }
-
-    /**
-     * @return the idtReuniao
-     */
-    public Integer getIdtReuniao() {
-        return idtReuniao;
-    }
-
-    /**
-     * @param idtReuniao the idtReuniao to set
-     */
-    public void setIdtReuniao(Integer idtReuniao) {
-        this.idtReuniao = idtReuniao;
-    }
-
 }
