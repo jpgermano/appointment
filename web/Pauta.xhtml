@@ -98,21 +98,21 @@
                             <h:outputText value="Ordem: " />  
                         </p:column>
                         <p:column>
-                            <p:inputText id="nmePauta" value="#{pautaMB.selecionado.ordPauta}" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
+                            <p:inputText id="ordPauta" value="#{pautaMB.selecionado.ordPauta}" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
                         </p:column>
                         <p:column>
                             <h:outputText value="Hora:" />  
                         </p:column>
                         <p:column>
-                            <p:inputText id="psoOmPauta" value="#{pautaMB.selecionado.hraTempoPauta}" size="4" required="true" requiredMessage="Peso em ordem de marcha � um campo obrigat�rio!">
-                                <f:validateDoubleRange minimum="0" maximum="9999" />
-                            </p:inputText>
+                         <p:calendar id="hraTempoPauta" value="#{pautaMB.selecionado.hraTempoPauta}" pattern="MM/dd/yyyy HH:mm:ss" />
+        
+
                         </p:column>
                         <p:column>
                             <h:outputText value="Texto: " />  
                         </p:column>
                         <p:column>
-                            <p:inputText id="nmePauta" value="#{pautaMB.selecionado.txtPauta }" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
+                            <p:inputText id="txtPauta" value="#{pautaMB.selecionado.txtPauta }" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
                         </p:column>
                         <p:column>
                             <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{pautaMB.salvar}" ajax="true"/>  
