@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='ISO-8859-1' ?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./template.xhtml"
@@ -8,122 +8,72 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="conteudo">
-        <p:panel header="Cadastro de Modelos">
-            <h:form id="frmConsulta">  
-                <p:growl id="msgs" showDetail="true"/>  
-                <p:panelGrid columns="2">
-                    <p:column>
-                        Montadora:
-                    </p:column>
-                    <p:column>
-                        <p:selectOneMenu id="cmbMontadoraPar" value="#{modeloMB.idtMontadoraPar}" effect="fold" editable="false">
-                            <f:selectItem itemLabel="Todas as Montadoras" itemValue="0" /> 
-                            <f:selectItems value="#{modeloMB.tbMontadoras}" var="m" itemLabel="#{m.sglMontadora}/#{m.nmeMontadora}" itemValue="#{m.idtMontadora}"/>  
-                        </p:selectOneMenu>
-                    </p:column>
-                    <p:column>
-                        Nome do Modelo:
-                    </p:column>
-                    <p:column>
-                        <p:inputText size="30" maxlength="50" value="#{modeloMB.nmeModelo}"/>
-                    </p:column>
-                    <p:column colspan="2">
-                        <p:commandButton value="Consultar" actionListener="#{modeloMB.filtrar}" update=":frmConsulta:msgs, :frmConsulta:dtbConsulta" icon="ui-icon-search"/>
-                    </p:column>
+        <p:panel header="Nova Reunião">
+            <h:form>  
+                <p:panelGrid>
+                    <f:metadata>
+                        Nova Reuniao
+                    </f:metadata>
+
                 </p:panelGrid>
+                <p:panelGrid columns="2">  
 
-                <p:dataTable id="dtbConsulta" var="reg" value="#{modeloMB.tbModelos}" tableStyle="width:auto;" paginator="true" rows="4">  
+                    <p:outputLabel>
+                        <h:outputText value="Local" />  
+                    </p:outputLabel>
+                    <p:outputLabel>
+                        <p:inputText id="nmeLocalReuniao" value="#{reuniaoMB.selecionado.nmeLocalReuniao}" size="50" required="true" requiredMessage="Nome é um campo obrigatório!"/>  
+                    </p:outputLabel>
+                    <p:outputLabel>
+                        <h:outputText value="Objetivo" />  
+                    </p:outputLabel>
+                    <p:outputLabel>
+                        <p:inputText id="txtObjReuniao" value="#{reuniaoMB.selecionado.txtObjReuniao}" size="50" required="true" requiredMessage="Nome é um campo obrigatório!"/>  
+                    </p:outputLabel>
+                    <p:outputLabel>  
+                        <h:outputText value="Data" />  
+                    </p:outputLabel>  
+                    <p:outputLabel>
+                        <p:calendar id="dtaReuniao" value="#{reuniaoMB.selecionado.dtaReuniao}" size="50"/>  
+                    </p:outputLabel>   
+                    <p:outputLabel>  
+                        <h:outputText value="Próxima reunião" />  
+                    </p:outputLabel>  
+                    <p:outputLabel>
+                        <p:calendar id="dtaProxReuniao" value="#{reuniaoMB.selecionado.dtaProxReuniao}" size="50"/>  
+                    </p:outputLabel>                      
+                    <p:outputLabel>  
+                        <h:outputText value="Projeto" />  
+                    </p:outputLabel>  
+                    <p:outputLabel>
+                        <p:inputText id="projetos" value="#{reuniaoMB.selecionado.tbProjeto.nmeProjeto}"/>  
+                    </p:outputLabel>  
 
-                    <p:column headerText="Identificador" style="width:100px">  
-                        <h:outputText value="#{reg.idtModelo}" />  
-                    </p:column>  
+                    <f:metadata>
+                        Participantes
+                    </f:metadata>
 
-                    <p:column headerText="Montadora" style="width:100px">  
-                        <h:outputText value="#{reg.tbMontadora.sglMontadora}" />  
-                    </p:column>  
+                    <p:outputLabel>
+                        <h:outputText value="Local" />  
+                    </p:outputLabel>
+                    <p:outputLabel>
+                        <f:selectItem id="taParticipanteses" value="#{reuniaoMB.selecionado.taParticipanteses}"/>  
+                    </p:outputLabel>
+                    <p:outputLabel>
+                        <h:outputText value="Funcão" />  
+                    </p:outputLabel>
+                    <p:outputLabel>
+                        <p:inputText id="findFirst" value="#{reuniaoMB.selecionado.txtObjReuniao}" size="50" required="true" requiredMessage="Nome é um campo obrigatório!"/>  
+                    </p:outputLabel>
 
-                    <p:column headerText="Nome" style="width:300px">  
-                        <h:outputText value="#{reg.nmeModelo}" />  
-                    </p:column>  
-
-                    <p:column headerText="Peso(OM)(KG)" style="width:100px">  
-                        <h:outputText value="#{reg.psoOmModelo}" />  
-                    </p:column>
-
-                    <p:column headerText="Opera��o" style="width:200px">  
-                        <p:panelGrid columns="2">  
-                            <p:column>
-                                <p:commandButton id="btnEditar" update=":frmEditar:pngEditar" oncomplete="PF('dlgEditarView').show()" icon="ui-icon-pencil" value="Editar">  
-                                    <f:setPropertyActionListener value="#{reg}" target="#{modeloMB.selecionado}" />  
-                                </p:commandButton>
-                            </p:column>
-                            <p:column>
-                                <p:commandButton id="btnExcluir" update=":frmExcluir:dlgConfExclusao" oncomplete="PF('dlgConfExclusaoView').show()" icon="ui-icon-trash" value="Excluir">  
-                                    <f:setPropertyActionListener value="#{reg}" target="#{modeloMB.selecionado}" />  
-                                </p:commandButton>  
-                            </p:column>
-                        </p:panelGrid>  
-                    </p:column>  
-
-                </p:dataTable>  
-
-                <p:commandButton id="btnNovo" update=":frmEditar:pngEditar" oncomplete="PF('dlgEditarView').show()" icon="ui-icon-plusthick" value="Novo" actionListener="#{modeloMB.novo}" ajax="true"/> 
-            </h:form> 
-
-            <p:dialog header="Editar" widgetVar="dlgEditarView" resizable="false" id="dlgEditar"  
-                      showEffect="fade" hideEffect="explode" modal="true">  
-                <h:form id="frmEditar">
-                    <p:panelGrid id="pngEditar" columns="2" style="margin:0 auto;">  
-                        <p:column>
-                            <h:outputText value="Identificador:" />  
-                        </p:column>
-                        <p:column>
-                            <p:inputText id="idtModelo" value="#{modeloMB.selecionado.idtModelo}" disabled="true" size="5"/>  
-                        </p:column>
-                        <p:column>
-                            <h:outputText value="Montadora:" />  
-                        </p:column>
-                        <p:column>
-                            <p:selectOneMenu id="cmbMontadora" value="#{modeloMB.idtMontadora}" effect="fold" editable="false">
-                                <f:selectItem itemLabel="Escolha uma Montadora" itemValue="0" /> 
-                                <f:selectItems value="#{modeloMB.tbMontadoras}" var="m" itemLabel="#{m.sglMontadora}/#{m.nmeMontadora}" itemValue="#{m.idtMontadora}"/>  
-                                <f:validateLongRange minimum="1"/>
-                            </p:selectOneMenu>  
-                        </p:column>
-                        <p:column>
-                            <h:outputText value="Nome:" />  
-                        </p:column>
-                        <p:column>
-                            <p:inputText id="nmeModelo" value="#{modeloMB.selecionado.nmeModelo}" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
-                        </p:column>
-                        <p:column>
-                            <h:outputText value="Peso em Ordem de Marcha:" />  
-                        </p:column>
-                        <p:column>
-                            <p:inputText id="psoOmModelo" value="#{modeloMB.selecionado.psoOmModelo}" size="4" required="true" requiredMessage="Peso em ordem de marcha � um campo obrigat�rio!">
-                                <f:validateDoubleRange minimum="0" maximum="9999" />
-                            </p:inputText>
-                        </p:column>
-
-                        <p:column>
-                            <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{modeloMB.salvar}" ajax="true"/>  
-                        </p:column>
-                        <p:column>
-                            <p:commandButton id="btnFechar" value="Fechar" icon="ui-icon-close" onclick="dlgEditarView.hide()"/>  
-                        </p:column>
-                    </p:panelGrid>  
-                </h:form>
-            </p:dialog>  
-
-            <h:form id="frmExcluir">
-                <p:confirmDialog id="dlgConfExclusao" message="Tem certeza que deseja excluir (#{modeloMB.selecionado.tbMontadora.sglMontadora}/#{modeloMB.selecionado.nmeModelo})?"  
-                                 header="Exclus�o de Registro" severity="alert" widgetVar="dlgConfExclusaoView">  
-                    <p:commandButton id="btnConfirm" value="Sim" update=":frmConsulta:dtbConsulta, :frmConsulta:msgs" oncomplete="PF('dlgConfExclusaoView').hide()" actionListener="#{modeloMB.excluir}" />  
-                    <p:commandButton id="btnDecline" value="N�o" onclick="PF('dlgConfExclusaoView').hide()" type="button" />   
-                </p:confirmDialog> 
+                    <p:outputLabel>
+                        <p:commandButton id="btnSalvar" icon="ui-icon-disk" value="Salvar"  actionListener="#{reuniaoMB.salvar}" ajax="true"/>  
+                    </p:outputLabel>
+                    <p:outputLabel>
+                        <p:commandButton id="btnFechar" value="Fechar" icon="ui-icon-close" onclick="dlgEditarView.hide()"/>  
+                    </p:outputLabel>
+                </p:panelGrid>  
             </h:form>
-
         </p:panel>
     </ui:define>
-
 </ui:composition>

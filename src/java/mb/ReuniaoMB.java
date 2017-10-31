@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package mb;
+
 import dao.*;
 import model.*;
 
@@ -28,37 +29,35 @@ public class ReuniaoMB {
     private List<TbAssunto> tbAssuntos;
     private List<TbProjeto> tbProjetos;
     private List<TbPauta> tbPautas;
-    private Integer idtAssuntoPar; 
-    private Integer idtProjetoPar; 
-    private Integer idtPautaPar; 
+    private Integer idtAssuntoPar;
+    private Integer idtProjetoPar;
+    private Integer idtPautaPar;
     private List<TaParticipantes> taParticipantes;
     private Date dtaReuniao;
+    private List<TbProjeto> listaProjetos; 
+    private String nmeLocalReuniao; 
 
-    private String nmeLocalReuniao;
-    
     /**
      * Creates a new instance of ReuniaoMB
      */
     public ReuniaoMB() {
         selecionado = new TbReuniao();
-        nmeLocalReuniao="";
-        idtAssuntoPar = 0; 
+        nmeLocalReuniao = "";
+        idtAssuntoPar = 0;
         idtProjetoPar = 0;
         idtPautaPar = 0;
-        
-//        TbAssuntoDAO dao = new TbAssuntoDAO();
-//        tbAssuntos = dao.consultarTodos();
-//        TbProjetoDAO tbProjetoDAO = new TbProjetoDAO();
-//        tbProjetoDAO.consultarTodos();
-//        TbPautaDAO tbPautaDAO = new TbPautaDAO();
-//        tbPautaDAO.consultarTodos();
+
+        TbReuniaoDAO dao = new TbReuniaoDAO();
+        setTbReunioes(dao.consultarTodos());
+        TbProjetoDAO projetos = new TbProjetoDAO();
+        setListaProjetos(projetos.consultarTodos());
     }
 
     public void filtrar() {
         TbReuniaoDAO dao = new TbReuniaoDAO();
         setTbReunioes(dao.consultarPorNmeLocal(getnmeLocalReuniao()));
     }
-    
+
     public void pesquisarPorData() {
         TbReuniaoDAO dao = new TbReuniaoDAO();
         setTbReunioes(dao.consultarPorData(getDtaReuniao()));
@@ -67,7 +66,11 @@ public class ReuniaoMB {
     public void novo() {
         setSelecionado(new TbReuniao());
         getSelecionado().setIdtReuniao(0);
-        nmeLocalReuniao="";
+        nmeLocalReuniao = "";
+    }
+    
+    public void setListaProjetos(List<TbProjeto> listaProjetos) {
+        this.listaProjetos = listaProjetos;
     }
 
     public void salvar() {
@@ -236,7 +239,7 @@ public class ReuniaoMB {
     public void setTaParticipantes(List<TaParticipantes> taParticipantes) {
         this.taParticipantes = taParticipantes;
     }
-    
+
     public TbReuniao getNovo() {
         return novo;
     }
@@ -260,7 +263,5 @@ public class ReuniaoMB {
     public void setNmeLocalReuniao(String nmeLocalReuniao) {
         this.nmeLocalReuniao = nmeLocalReuniao;
     }
-    
-    
 
 }

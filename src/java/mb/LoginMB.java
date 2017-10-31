@@ -42,14 +42,13 @@ public class LoginMB {
         TaFuncionario funcionario = dao.consultarPorLogin(getLogin(), getSenha());
 
         if (funcionario == null && cargo == null) {
-            setCargo("INVALIDO");
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Falha no login", "Você não tem permissão para entrar no sistema.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         } else {
             if (funcionario != null) {
                 setCargo("Funcionário Comum");
                 setNome(funcionario.getTbPessoa().getNmePessoa());
-                ret = "/Funcionario/index";
+                ret = "/Funcionario.xhtml";
             }
          /*   if (funcionario != null && cargo.equals("Programador")) {
                 setCargo("Funcionario Administrador");
