@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="conteudo">
+        <p:panel header="Cadastro de Assuntos">
+            <h:form id="frmConsulta">  
+                <p:growl id="msgs" showDetail="true"/>  
+                <p:panelGrid columns="2">
+                    <p:column>
+                        Reuniao:
+                    </p:column>
+                    <p:column>
+                        <p:selectOneMenu id="cmbReuniaoPar" value="#{assuntoMB.idtReuniaoPar}" effect="fold" editable="false">
+                            <f:selectItem itemLabel="Todas as reuniões" itemValue="0" /> 
+                            <f:selectItems value="#{assuntoMB.tbReuniaos}" var="m" itemLabel="#{m.nmeLocalReuniao}/#{m.dtaReuniao}" itemValue="#{m.idtReuniao}"/>  
+                        </p:selectOneMenu>
+                    </p:column>
+                    <p:column>
+                        Texto do Assunto:
+                    </p:column>
+                    <p:column>
+                        <p:inputText size="30" maxlength="50" value="#{assuntoMB.txtAssunto}"/>
+                    </p:column>
+                    <p:column colspan="2">
+                        <p:commandButton value="Consultar" actionListener="#{assuntoMB.filtrar}" update=":frmConsulta:msgs, :frmConsulta:dtbConsulta" icon="ui-icon-search"/>
+                    </p:column>
+                </p:panelGrid>
+
+                <p:dataTable id="dtbConsulta" var="reg" value="#{assuntoMB.tbAssuntos}" tableStyle="width:auto;" paginator="true" rows="4">  
+
+                    <p:column headerText="Identificador" style="width:100px">  
+                        <h:outputText value="#{reg.idtAssunto}" />  
+                    </p:column>  
+
+                    <p:column headerText="Reuniao" style="width:100px">  
+                        <h:outputText value="#{reg.tbReuniao.nmeLocalReuniao}" />  
+                    </p:column>  
+
+                    <p:column headerText="Início" style="width:300px">  
+                        <h:outputText value="#{reg.hraInicioAssunto}"> 
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                        </h:outputText>
+                    </p:column>  
+
+                    <p:column headerText="Término" style="width:100px">  
+                        <h:outputText value="#{reg.hraTerminoAssunto}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                        </h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Duração" style="width:100px">  
+                        <h:outputText value="#{reg.hraDuracaoAssunto}" > 
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                        </h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Texto" style="width:100px">  
+                        <h:outputText value="#{reg.txtAssunto}" />  
+                    </p:column>
+                    <p:column headerText="Pauta extra" style="width:100px">  
+                        <h:outputText value="#{reg.tbPauta.idtPauta}" />  
+                    </p:column>
+                    <p:column headerText="Texto pauta extra" style="width:100px">  
+                        <h:outputText value="#{reg.txtPautaExtraAssunto}" />  
+                    </p:column>
+
+                    <p:column headerText="Opera��o" style="width:200px">  
+                        <p:panelGrid columns="2">  
+                            <p:column>
+                                <p:commandButton id="btnEditar" update=":frmEditar:pngEditar" oncomplete="PF('dlgEditarView').show()" icon="ui-icon-pencil" value="Editar">  
+                                    <f:setPropertyActionListener value="#{reg}" target="#{assuntoMB.selecionado}" />  
+                                </p:commandButton>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton id="btnExcluir" update=":frmExcluir:dlgConfExclusao" oncomplete="PF('dlgConfExclusaoView').show()" icon="ui-icon-trash" value="Excluir">  
+                                    <f:setPropertyActionListener value="#{reg}" target="#{assuntoMB.selecionado}" />  
+                                </p:commandButton>  
+                            </p:column>
+                        </p:panelGrid>  
+                    </p:column>  
+
+                </p:dataTable>  
+
+                <p:commandButton id="btnNovo" update=":frmEditar:pngEditar" oncomplete="PF('dlgEditarView').show()" icon="ui-icon-plusthick" value="Novo" actionListener="#{assuntoMB.novo}" ajax="true"/> 
+            </h:form> 
+
+            <p:dialog header="Editar" widgetVar="dlgEditarView" resizable="false" id="dlgEditar"  
+                      showEffect="fade" hideEffect="explode" modal="true">  
+                <h:form id="frmEditar">
+                    <p:panelGrid id="pngEditar" columns="2" style="margin:0 auto;">  
+                        <p:column>
+                            <h:outputText value="Identificador:" />  
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="idtAssunto" value="#{assuntoMB.selecionado.idtAssunto}" disabled="true" size="5"/>  
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Reuniao:" />  
+                        </p:column>
+                        <p:column>
+                            <p:selectOneMenu id="cmbReuniao" value="#{assuntoMB.idtReuniao}" effect="fold" editable="false">
+                                <f:selectItem itemLabel="Escolha uma Reuniao" itemValue="0" /> 
+                                <f:selectItems value="#{assuntoMB.tbReuniaos}" var="m" itemLabel="#{m.nmeLocalReuniao}/#{m.dtaReuniao}" itemValue="#{m.idtReuniao}"/>  
+                                <f:validateLongRange minimum="1"/>
+                            </p:selectOneMenu>  
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Início: " />  
+                        </p:column>
+                        <p:column>
+
+                            <p:calendar id="hraInicioAssunto" value="#{assuntoMB.selecionado.hraInicioAssunto}" pattern="MM/dd/yyyy HH:mm:ss" />
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Término:" />  
+                        </p:column>
+                        <p:column>
+   
+                            <p:calendar id="hraTerminoAssunto" value="#{assuntoMB.selecionado.hraTerminoAssunto}" pattern="MM/dd/yyyy HH:mm:ss" />
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Duração: " />  
+                        </p:column>
+                        <p:column>
+                            
+                             <p:calendar id="hraDuracaoAssunto" value="#{assuntoMB.selecionado.hraDuracaoAssunto }" pattern="MM/dd/yyyy HH:mm:ss" />
+                        </p:column>    
+                        <p:column>
+                            <h:outputText value="Texto: " />  
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="txtAssunto" value="#{assuntoMB.selecionado.txtAssunto }" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Pauta extra: " />  
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="idtPauta" value="#{assuntoMB.selecionado.tbPauta.idtPauta }" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Texto pauta extra: " />  
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="txtPautaExtraAssunto" value="#{assuntoMB.selecionado.txtPautaExtraAssunto }" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
+                        </p:column>
+                        <p:column>
+                            <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{assuntoMB.salvar}" ajax="true"/>  
+                        </p:column>
+                        <p:column>
+                            <p:commandButton id="btnFechar" value="Fechar" icon="ui-icon-close" onclick="dlgEditarView.hide()"/>  
+                        </p:column>
+                    </p:panelGrid>  
+                </h:form>
+            </p:dialog>  
+
+            <h:form id="frmExcluir">
+                <p:confirmDialog id="dlgConfExclusao" message="Tem certeza que deseja excluir (#{assuntoMB.selecionado.tbReuniao.nmeLocalReuniao}/#{assuntoMB.selecionado.txtAssunto})?"  
+                                 header="Exclus�o de Registro" severity="alert" widgetVar="dlgConfExclusaoView">  
+                    <p:commandButton id="btnConfirm" value="Sim" update=":frmConsulta:dtbConsulta, :frmConsulta:msgs" oncomplete="PF('dlgConfExclusaoView').hide()" actionListener="#{assuntoMB.excluir}" />  
+                    <p:commandButton id="btnDecline" value="N�o" onclick="PF('dlgConfExclusaoView').hide()" type="button" />   
+                </p:confirmDialog> 
+            </h:form>
+
+        </p:panel>
+    </ui:define>
+
+</ui:composition>
