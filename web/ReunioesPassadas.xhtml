@@ -16,7 +16,7 @@
                         Data da reunião:
                     </p:column>
                     <p:column>
-                        <p:inputText size="15" maxlength="30" value="#{reuniaoMB.nmeLocalReuniao}"/>
+                        <p:calendar size="15" maxlength="30" value="#{reuniaoMB.dtaReuniao}"/>
                     </p:column>
                     <p:column>
                         <p:commandButton value="Consultar" actionListener="#{reuniaoMB.filtrar()}" update=":frmConsulta:msgs, :frmConsulta:dtbConsulta" icon="ui-icon-search"/>

@@ -8,6 +8,7 @@ import model.*;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -27,11 +28,12 @@ public class ReuniaoMB {
     private List<TbAssunto> tbAssuntos;
     private List<TbProjeto> tbProjetos;
     private List<TbPauta> tbPautas;
-    private Integer idtAssuntoPar; // Usado na combo de montadora nos parâmetros de consulta
-    private Integer idtProjetoPar; // Usado na combo de modelo nos parâmetros de consulta
-    private Integer idtPautaPar; // Usado na combo de versão nos parâmetros de consulta    
-    private List<TaParticipantes> taParticipantes;    
-    
+    private Integer idtAssuntoPar; 
+    private Integer idtProjetoPar; 
+    private Integer idtPautaPar; 
+    private List<TaParticipantes> taParticipantes;
+    private Date dtaReuniao;
+
     private String nmeLocalReuniao;
     
     /**
@@ -44,22 +46,22 @@ public class ReuniaoMB {
         idtProjetoPar = 0;
         idtPautaPar = 0;
         
-        TbAssuntoDAO dao = new TbAssuntoDAO();
-        tbAssuntos = dao.consultarTodos();
-        TbProjetoDAO tbProjetoDAO = new TbProjetoDAO();
-        tbProjetoDAO.consultarTodos();
-        TbPautaDAO tbPautaDAO = new TbPautaDAO();
-        tbPautaDAO.consultarTodos();
-        
-      
-      
-        
-        filtrar();
+//        TbAssuntoDAO dao = new TbAssuntoDAO();
+//        tbAssuntos = dao.consultarTodos();
+//        TbProjetoDAO tbProjetoDAO = new TbProjetoDAO();
+//        tbProjetoDAO.consultarTodos();
+//        TbPautaDAO tbPautaDAO = new TbPautaDAO();
+//        tbPautaDAO.consultarTodos();
     }
 
     public void filtrar() {
         TbReuniaoDAO dao = new TbReuniaoDAO();
         setTbReunioes(dao.consultarPorNmeLocal(getnmeLocalReuniao()));
+    }
+    
+    public void pesquisarPorData() {
+        TbReuniaoDAO dao = new TbReuniaoDAO();
+        setTbReunioes(dao.consultarPorData(getDtaReuniao()));
     }
 
     public void novo() {
@@ -233,6 +235,30 @@ public class ReuniaoMB {
      */
     public void setTaParticipantes(List<TaParticipantes> taParticipantes) {
         this.taParticipantes = taParticipantes;
+    }
+    
+    public TbReuniao getNovo() {
+        return novo;
+    }
+
+    public void setNovo(TbReuniao novo) {
+        this.novo = novo;
+    }
+
+    public Date getDtaReuniao() {
+        return dtaReuniao;
+    }
+
+    public void setDtaReuniao(Date dtaReuniao) {
+        this.dtaReuniao = dtaReuniao;
+    }
+
+    public String getNmeLocalReuniao() {
+        return nmeLocalReuniao;
+    }
+
+    public void setNmeLocalReuniao(String nmeLocalReuniao) {
+        this.nmeLocalReuniao = nmeLocalReuniao;
     }
     
     
