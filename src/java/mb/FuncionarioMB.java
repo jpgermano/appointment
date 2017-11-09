@@ -4,16 +4,13 @@
  */
 package mb;
 
-import dao.TaFuncionarioDAO;
-import java.util.HashSet;
+import dao.*;
 import java.util.List;
-import java.util.Set;
-import model.TaFuncionario;
+import model.*;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import model.TaParticipantes;
 import model.TbCargo;
 import model.TbEmpresa;
 import model.TbPessoa;
@@ -31,15 +28,20 @@ public class FuncionarioMB {
     private TaFuncionario selecionado;
     private List<TaFuncionario> TaFuncionarios;
     private String nmeFuncionario;
-     private Integer idtFuncionario;
-     private TbCargo tbCargo;
-     private TbEmpresa tbEmpresa;
-     private TbPessoa tbPessoa;
-     private TbSetor tbSetor;
-     private boolean flgAtivo;
-     private String lgnFuncionario;
-     private String pswFuncionario;
-     private Set<TaParticipantes> taParticipanteses = new HashSet<TaParticipantes>(0);
+    private List<TbCargo> tbCargos;
+    private Integer idtCargo; // Usado na combo de novo e edição
+    private Integer idtCargoPar; // Usado na combo de parâmetros de consulta
+    private List<TbEmpresa> tbEmpresas;
+    private Integer idtEmpresa; // Usado na combo de novo e edição
+    private Integer idtEmpresaPar; // Usado na combo de parâmetros de consulta
+    private List<TbPessoa> tbPessoas;
+    private Integer idtPessoa; // Usado na combo de novo e edição
+    private Integer idtPessoaPar; // Usado na combo de parâmetros de consulta
+    private List<TbSetor> tbSetores;
+    private Integer idtSetor; // Usado na combo de novo e edição
+    private Integer idtSetorPar; // Usado na combo de parâmetros de consulta
+    
+
     
     /**
      * Creates a new instance of ProdutoMB
@@ -47,6 +49,23 @@ public class FuncionarioMB {
     public FuncionarioMB() {
         selecionado = new TaFuncionario();
         nmeFuncionario="";
+        
+        idtCargoPar = 0;
+        TbCargoDAO dao = new TbCargoDAO();
+        tbCargos = dao.consultarTodos();
+        
+        idtEmpresaPar = 0;
+        TbEmpresaDAO tbEmpresaDAO = new TbEmpresaDAO();
+        tbEmpresas = tbEmpresaDAO.consultarTodos();
+        
+        idtPessoaPar = 0;
+        TbPessoaDAO tbPessoaDAO = new TbPessoaDAO();
+        tbPessoas = tbPessoaDAO.consultarTodos();
+        
+        idtSetorPar = 0;
+        TbSetorDAO tbSetorDAO = new TbSetorDAO();
+        tbSetores = tbSetorDAO.consultarTodos();
+        
         filtrar();
     }
 
@@ -59,6 +78,16 @@ public class FuncionarioMB {
         setSelecionado(new TaFuncionario());
         getSelecionado().setIdtFuncionario(0);
         nmeFuncionario="";
+        idtSetor = 0;
+        idtCargo = 0;
+        idtSetorPar = 0;
+        idtCargoPar= 0;
+        idtEmpresa = 0;
+        idtPessoa = 0;
+        idtEmpresaPar = 0;
+        idtPessoaPar = 0;
+        TbPessoaDAO tbPessoaDAO = new TbPessoaDAO();
+        tbPessoas = tbPessoaDAO.consultarTodos();
     }
 
     public void salvar() {
@@ -103,20 +132,6 @@ public class FuncionarioMB {
     }
 
     /**
-     * @return the nmeFuncionario
-     */
-    public String getnmeFuncionario() {
-        return nmeFuncionario;
-    }
-
-    /**
-     * @param nmeFuncionario the nmeFuncionario to set
-     */
-    public void setnmeFuncionario(String nmeFuncionario) {
-        this.nmeFuncionario = nmeFuncionario;
-    }
-
-    /**
      * @return the TaFuncionarios
      */
     public List<TaFuncionario> getTaFuncionarios() {
@@ -130,84 +145,189 @@ public class FuncionarioMB {
         this.TaFuncionarios = TaFuncionarios;
     }
 
+    /**
+     * @return the nmeFuncionario
+     */
     public String getNmeFuncionario() {
         return nmeFuncionario;
     }
 
+    /**
+     * @param nmeFuncionario the nmeFuncionario to set
+     */
     public void setNmeFuncionario(String nmeFuncionario) {
         this.nmeFuncionario = nmeFuncionario;
     }
 
-    public Integer getIdtFuncionario() {
-        return idtFuncionario;
+    /**
+     * @return the tbCargos
+     */
+    public List<TbCargo> getTbCargos() {
+        return tbCargos;
     }
 
-    public void setIdtFuncionario(Integer idtFuncionario) {
-        this.idtFuncionario = idtFuncionario;
+    /**
+     * @param tbCargos the tbCargos to set
+     */
+    public void setTbCargos(List<TbCargo> tbCargos) {
+        this.tbCargos = tbCargos;
     }
 
-    public TbCargo getTbCargo() {
-        return tbCargo;
+    /**
+     * @return the idtCargo
+     */
+    public Integer getIdtCargo() {
+        return idtCargo;
     }
 
-    public void setTbCargo(TbCargo tbCargo) {
-        this.tbCargo = tbCargo;
+    /**
+     * @param idtCargo the idtCargo to set
+     */
+    public void setIdtCargo(Integer idtCargo) {
+        this.idtCargo = idtCargo;
     }
 
-    public TbEmpresa getTbEmpresa() {
-        return tbEmpresa;
+    /**
+     * @return the idtCargoPar
+     */
+    public Integer getIdtCargoPar() {
+        return idtCargoPar;
     }
 
-    public void setTbEmpresa(TbEmpresa tbEmpresa) {
-        this.tbEmpresa = tbEmpresa;
+    /**
+     * @param idtCargoPar the idtCargoPar to set
+     */
+    public void setIdtCargoPar(Integer idtCargoPar) {
+        this.idtCargoPar = idtCargoPar;
     }
 
-    public TbPessoa getTbPessoa() {
-        return tbPessoa;
+    /**
+     * @return the tbEmpresas
+     */
+    public List<TbEmpresa> getTbEmpresas() {
+        return tbEmpresas;
     }
 
-    public void setTbPessoa(TbPessoa tbPessoa) {
-        this.tbPessoa = tbPessoa;
+    /**
+     * @param tbEmpresas the tbEmpresas to set
+     */
+    public void setTbEmpresas(List<TbEmpresa> tbEmpresas) {
+        this.tbEmpresas = tbEmpresas;
     }
 
-    public TbSetor getTbSetor() {
-        return tbSetor;
+    /**
+     * @return the idtEmpresa
+     */
+    public Integer getIdtEmpresa() {
+        return idtEmpresa;
     }
 
-    public void setTbSetor(TbSetor tbSetor) {
-        this.tbSetor = tbSetor;
+    /**
+     * @param idtEmpresa the idtEmpresa to set
+     */
+    public void setIdtEmpresa(Integer idtEmpresa) {
+        this.idtEmpresa = idtEmpresa;
     }
 
-    public boolean isFlgAtivo() {
-        return flgAtivo;
+    /**
+     * @return the idtEmpresaPar
+     */
+    public Integer getIdtEmpresaPar() {
+        return idtEmpresaPar;
     }
 
-    public void setFlgAtivo(boolean flgAtivo) {
-        this.flgAtivo = flgAtivo;
+    /**
+     * @param idtEmpresaPar the idtEmpresaPar to set
+     */
+    public void setIdtEmpresaPar(Integer idtEmpresaPar) {
+        this.idtEmpresaPar = idtEmpresaPar;
     }
 
-    public String getLgnFuncionario() {
-        return lgnFuncionario;
+    /**
+     * @return the tbPessoas
+     */
+    public List<TbPessoa> getTbPessoas() {
+        return tbPessoas;
     }
 
-    public void setLgnFuncionario(String lgnFuncionario) {
-        this.lgnFuncionario = lgnFuncionario;
+    /**
+     * @param tbPessoas the tbPessoas to set
+     */
+    public void setTbPessoas(List<TbPessoa> tbPessoas) {
+        this.tbPessoas = tbPessoas;
     }
 
-    public String getPswFuncionario() {
-        return pswFuncionario;
+    /**
+     * @return the idtPessoa
+     */
+    public Integer getIdtPessoa() {
+        return idtPessoa;
     }
 
-    public void setPswFuncionario(String pswFuncionario) {
-        this.pswFuncionario = pswFuncionario;
+    /**
+     * @param idtPessoa the idtPessoa to set
+     */
+    public void setIdtPessoa(Integer idtPessoa) {
+        this.idtPessoa = idtPessoa;
     }
 
-    public Set<TaParticipantes> getTaParticipanteses() {
-        return taParticipanteses;
+    /**
+     * @return the idtPessoaPar
+     */
+    public Integer getIdtPessoaPar() {
+        return idtPessoaPar;
     }
 
-    public void setTaParticipanteses(Set<TaParticipantes> taParticipanteses) {
-        this.taParticipanteses = taParticipanteses;
+    /**
+     * @param idtPessoaPar the idtPessoaPar to set
+     */
+    public void setIdtPessoaPar(Integer idtPessoaPar) {
+        this.idtPessoaPar = idtPessoaPar;
     }
+
+    /**
+     * @return the tbSetores
+     */
+    public List<TbSetor> getTbSetores() {
+        return tbSetores;
+    }
+
+    /**
+     * @param tbSetores the tbSetores to set
+     */
+    public void setTbSetores(List<TbSetor> tbSetores) {
+        this.tbSetores = tbSetores;
+    }
+
+    /**
+     * @return the idtSetor
+     */
+    public Integer getIdtSetor() {
+        return idtSetor;
+    }
+
+    /**
+     * @param idtSetor the idtSetor to set
+     */
+    public void setIdtSetor(Integer idtSetor) {
+        this.idtSetor = idtSetor;
+    }
+
+    /**
+     * @return the idtSetorPar
+     */
+    public Integer getIdtSetorPar() {
+        return idtSetorPar;
+    }
+
+    /**
+     * @param idtSetorPar the idtSetorPar to set
+     */
+    public void setIdtSetorPar(Integer idtSetorPar) {
+        this.idtSetorPar = idtSetorPar;
+    }
+
+    
+ 
 
 }

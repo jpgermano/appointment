@@ -4,9 +4,9 @@
  */
 package mb;
 
-import dao.TbSetorDAO;
+import dao.TbCargoDAO;
 import java.util.List;
-import model.TbSetor;
+import model.TbCargo;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -21,34 +21,34 @@ import javax.faces.context.FacesContext;
 @ViewScoped
 public class CargoMB {
 
-    private TbSetor selecionado;
-    private List<TbSetor> tbSetores;
-    private String nmeSetor;
+    private TbCargo selecionado;
+    private List<TbCargo> tbCargos;
+    private String nmeCargo;
     
     /**
-     * Creates a new instance of SetorMB
+     * Creates a new instance of CargoMB
      */
     public CargoMB() {
-        selecionado = new TbSetor();
-        nmeSetor="";
+        selecionado = new TbCargo();
+        nmeCargo="";
         filtrar();
     }
 
     public void filtrar() {
-        TbSetorDAO dao = new TbSetorDAO();
-        setTbSetores(dao.consultarPorNme(getnmeSetor()));
+        TbCargoDAO dao = new TbCargoDAO();
+        setTbCargos(dao.consultarPorNme(getnmeCargo()));
     }
 
     public void novo() {
-        setSelecionado(new TbSetor());
-        getSelecionado().setIdtSetor(0);
-        nmeSetor="";
+        setSelecionado(new TbCargo());
+        getSelecionado().setIdtCargo(0);
+        nmeCargo="";
     }
 
     public void salvar() {
-        TbSetorDAO dao = new TbSetorDAO();
-        if (getSelecionado().getIdtSetor() == 0) {
-            getSelecionado().setIdtSetor(null);
+        TbCargoDAO dao = new TbCargoDAO();
+        if (getSelecionado().getIdtCargo() == 0) {
+            getSelecionado().setIdtCargo(null);
             dao.incluir(getSelecionado());
         } else {
             dao.juntar(getSelecionado());
@@ -59,9 +59,9 @@ public class CargoMB {
     }
 
     public void excluir() {
-        TbSetorDAO dao = new TbSetorDAO();
-        if (getSelecionado().getIdtSetor() != 0) {
-            if (dao.excluir(getSelecionado().getIdtSetor())) {
+        TbCargoDAO dao = new TbCargoDAO();
+        if (getSelecionado().getIdtCargo() != 0) {
+            if (dao.excluir(getSelecionado().getIdtCargo())) {
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Resultado da Exclusão", "Exclusão efetuada com sucesso.");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
             } else {
@@ -75,43 +75,43 @@ public class CargoMB {
     /**
      * @return the selecionado
      */
-    public TbSetor getSelecionado() {
+    public TbCargo getSelecionado() {
         return selecionado;
     }
 
     /**
      * @param selecionado the selecionado to set
      */
-    public void setSelecionado(TbSetor selecionado) {
+    public void setSelecionado(TbCargo selecionado) {
         this.selecionado = selecionado;
     }
 
     /**
-     * @return the nmeSetor
+     * @return the nmeCargo
      */
-    public String getnmeSetor() {
-        return nmeSetor;
+    public String getnmeCargo() {
+        return nmeCargo;
     }
 
     /**
-     * @param nmeSetor the nmeSetor to set
+     * @param nmeCargo the nmeCargo to set
      */
-    public void setnmeSetor(String nmeSetor) {
-        this.nmeSetor = nmeSetor;
+    public void setnmeCargo(String nmeCargo) {
+        this.nmeCargo = nmeCargo;
     }
 
     /**
-     * @return the tbSetores
+     * @return the tbCargos
      */
-    public List<TbSetor> getTbSetores() {
-        return tbSetores;
+    public List<TbCargo> getTbCargos() {
+        return tbCargos;
     }
 
     /**
-     * @param tbSetores the tbSetores to set
+     * @param tbCargos the tbCargos to set
      */
-    public void setTbSetores(List<TbSetor> tbSetores) {
-        this.tbSetores = tbSetores;
+    public void setTbCargos(List<TbCargo> tbCargos) {
+        this.tbCargos = tbCargos;
     }
 
 }

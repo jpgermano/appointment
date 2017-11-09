@@ -48,7 +48,7 @@
 
                     <p:column headerText="Hora" style="width:100px">  
                         <h:outputText value="#{reg.hraTempoPauta}">
-                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                            <f:convertDateTime pattern="HH:mm:ss"/>
                         </h:outputText>
                     </p:column>
                     
@@ -100,14 +100,14 @@
                             <h:outputText value="Ordem: " />  
                         </p:column>
                         <p:column>
-                            <p:inputText id="ordPauta" value="#{pautaMB.selecionado.ordPauta}" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
+                            <p:spinner id="ordPauta" value="#{pautaMB.selecionado.ordPauta}" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
                         </p:column>
                         <p:column>
                             <h:outputText value="Hora:" />  
                         </p:column>
                         <p:column>
-                         <p:calendar id="hraTempoPauta" value="#{pautaMB.selecionado.hraTempoPauta}" pattern="MM/dd/yyyy HH:mm:ss" />
-        
+                            <p:calendar timeOnly="true" id="hraTempoPauta" value="#{pautaMB.selecionado.hraTempoPauta}" pattern="HH:mm:ss" />
+                         
 
                         </p:column>
                         <p:column>

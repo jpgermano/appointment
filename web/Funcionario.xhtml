@@ -42,9 +42,27 @@
                     </p:column> 
                     
                     <p:column headerText="Endereco" style="width:300px">  
-                        <h:outputText value="#{reg.tbPessoa.emlPessoa}" />  
+                        <h:outputText value="#{reg.tbPessoa.endPessoa}" />  
+                    </p:column>
+                    
+                    <p:column headerText="Setor" style="width:300px">  
+                        <h:outputText value="#{reg.tbSetor.nmeSetor}" />  
                     </p:column> 
-     
+                    
+                    <p:column headerText="Cargo" style="width:300px">  
+                        <h:outputText value="#{reg.tbCargo.nmeCargo}" />  
+                    </p:column> 
+                    
+                    <p:column headerText="Empresa" style="width:300px">  
+                        <h:outputText value="#{reg.tbEmpresa.nmeEmpresa}" />  
+                    </p:column>
+                    <p:column headerText="Login" style="width:300px">  
+                        <h:outputText value="#{reg.lgnFuncionario}" />  
+                    </p:column>
+                    <p:column headerText="Senha" style="width:300px">  
+                        <h:outputText value="#{reg.pswFuncionario}" />  
+                    </p:column>
+                    
                     <p:column headerText="Operacao" style="width:200px">  
                         <p:panelGrid columns="2">  
                             <p:column>
@@ -102,7 +120,34 @@
                         </p:column> 
                         <p:column>
                             <p:inputText id="emlPessoa" value="#{funcionarioMB.selecionado.tbPessoa.emlPessoa}"  size="50"/>  
-                        </p:column>                        
+                        </p:column>
+                    <p:column>
+                        Setor:
+                    </p:column>
+                    <p:column>
+                        <p:selectOneMenu id="cmbSetorPar" value="#{funcionarioMB.idtSetorPar}" effect="fold" editable="false">
+                            <f:selectItem itemLabel="Todas os setores" itemValue="0" /> 
+                            <f:selectItems value="#{funcionarioMB.tbSetores}" var="m" itemLabel="#{m.nmeSetor}" itemValue="#{m.idtSetor}"/>  
+                        </p:selectOneMenu>
+                    </p:column>
+                    <p:column>
+                        Cargo:
+                    </p:column>
+                    <p:column>
+                        <p:selectOneMenu id="cmbCargoPar" value="#{funcionarioMB.idtCargoPar}" effect="fold" editable="false">
+                            <f:selectItem itemLabel="Todas os cargos" itemValue="0" /> 
+                            <f:selectItems value="#{funcionarioMB.tbCargos}" var="n" itemLabel="#{n.nmeCargo}" itemValue="#{n.idtCargo}"/>  
+                        </p:selectOneMenu>
+                    </p:column>
+                    <p:column>
+                        Empresa:
+                    </p:column>
+                    <p:column>
+                        <p:selectOneMenu id="cmbEmpresaPar" value="#{funcionarioMB.idtEmpresaPar}" effect="fold" editable="false">
+                            <f:selectItem itemLabel="Todas as empresas" itemValue="0" /> 
+                            <f:selectItems value="#{funcionarioMB.tbEmpresas}" var="o" itemLabel="#{o.nmeEmpresa}/#{o.nmeAreaEmpresa}" itemValue="#{o.idtEmpresa}"/>  
+                        </p:selectOneMenu>
+                    </p:column>                        
                         <p:column>  
                             <h:outputText value="Senha (Redefinir)" />  
                         </p:column> 
