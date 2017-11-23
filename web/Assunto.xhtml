@@ -141,7 +141,11 @@
                             <h:outputText value="Pauta extra: " />  
                         </p:column>
                         <p:column>
-                            <p:inputText id="idtPauta" value="#{assuntoMB.selecionado.tbPauta.idtPauta }" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
+                            <p:selectOneMenu id="cmbPauta" value="#{assuntoMB.idtPauta}" effect="fold" editable="false">
+                                <f:selectItem itemLabel="Escolha uma pauta" itemValue="0" /> 
+                                <f:selectItems value="#{assuntoMB.tbPautas}" var="n" itemLabel="#{n.txtPauta}/#{n.ordPauta}" itemValue="#{n.idtPauta}"/>  
+                                <f:validateLongRange minimum="1"/>
+                            </p:selectOneMenu>  
                         </p:column>
                         <p:column>
                             <h:outputText value="Texto pauta extra: " />  

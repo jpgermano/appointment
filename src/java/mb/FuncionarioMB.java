@@ -27,7 +27,7 @@ public class FuncionarioMB {
 
     private TaFuncionario selecionado;
     private List<TaFuncionario> TaFuncionarios;
-    private String nmeFuncionario;
+    private String nmePessoa;
     private List<TbCargo> tbCargos;
     private Integer idtCargo; // Usado na combo de novo e edição
     private Integer idtCargoPar; // Usado na combo de parâmetros de consulta
@@ -48,7 +48,7 @@ public class FuncionarioMB {
      */
     public FuncionarioMB() {
         selecionado = new TaFuncionario();
-        nmeFuncionario="";
+        nmePessoa="";
         
         idtCargoPar = 0;
         TbCargoDAO dao = new TbCargoDAO();
@@ -71,26 +71,27 @@ public class FuncionarioMB {
 
     public void filtrar() {
         TaFuncionarioDAO dao = new TaFuncionarioDAO();
-        setTaFuncionarios(dao.consultarTodos());
+        setTaFuncionarios(dao.consultarPorPessoa(getIdtPessoaPar()));
     }
 
     public void novo() {
         setSelecionado(new TaFuncionario());
         getSelecionado().setIdtFuncionario(0);
-        nmeFuncionario="";
-        idtSetor = 0;
-        idtCargo = 0;
-        idtSetorPar = 0;
-        idtCargoPar= 0;
-        idtEmpresa = 0;
-        idtPessoa = 0;
-        idtEmpresaPar = 0;
-        idtPessoaPar = 0;
-        TbPessoaDAO tbPessoaDAO = new TbPessoaDAO();
-        tbPessoas = tbPessoaDAO.consultarTodos();
+        nmePessoa = "";
+        idtSetor= 0;
+        idtCargo =0;
+        idtEmpresa =0;
+        idtPessoa =0;
+
     }
 
     public void salvar() {
+        TbEmpresaDAO tbEmpresaDAO = new TbEmpresaDAO();
+        selecionado.setTbEmpresa(tbEmpresaDAO.consultarPorIdt(idtEmpresa));
+        TbCargoDAO tbCargoDAO = new TbCargoDAO();
+        selecionado.setTbCargo(tbCargoDAO.consultarPorIdt(idtCargo));
+        TbSetorDAO tbSetorDAO = new TbSetorDAO();
+        selecionado.setTbSetor(tbSetorDAO.consultarPorIdt(idtSetor));
         TaFuncionarioDAO dao = new TaFuncionarioDAO();
         if (getSelecionado().getIdtFuncionario()== 0) {
             getSelecionado().setIdtFuncionario(null);
@@ -146,17 +147,17 @@ public class FuncionarioMB {
     }
 
     /**
-     * @return the nmeFuncionario
+     * @return the nmePessoa
      */
-    public String getNmeFuncionario() {
-        return nmeFuncionario;
+    public String getNmePessoa() {
+        return nmePessoa;
     }
 
     /**
-     * @param nmeFuncionario the nmeFuncionario to set
+     * @param nmePessoa the nmePessoa to set
      */
-    public void setNmeFuncionario(String nmeFuncionario) {
-        this.nmeFuncionario = nmeFuncionario;
+    public void setNmePessoa(String nmePessoa) {
+        this.nmePessoa = nmePessoa;
     }
 
     /**
@@ -326,6 +327,8 @@ public class FuncionarioMB {
     public void setIdtSetorPar(Integer idtSetorPar) {
         this.idtSetorPar = idtSetorPar;
     }
+
+
 
     
  

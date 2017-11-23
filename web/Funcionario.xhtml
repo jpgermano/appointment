@@ -13,10 +13,13 @@
                 <p:growl id="msgs" showDetail="true"/>  
                 <p:panelGrid columns="3">
                     <p:column>
-                        Funcionario:
+                        Pessoa:
                     </p:column>
                     <p:column>
-                        <p:inputText size="15" maxlength="30" value="#{funcionarioMB.nmeFuncionario}"/>
+                        <p:selectOneMenu id="cmbPessoaPar" value="#{funcionarioMB.idtPessoaPar}" effect="fold" editable="false">
+                            <f:selectItem itemLabel="Todas as pessoas" itemValue="0" /> 
+                            <f:selectItems value="#{funcionarioMB.tbPessoas}" var="m" itemLabel="#{m.nmePessoa}/#{m.emlPessoa}" itemValue="#{m.idtPessoa}"/>  
+                        </p:selectOneMenu>
                     </p:column>
                     <p:column>
                         <p:commandButton value="Consultar" actionListener="#{funcionarioMB.filtrar()}" update=":frmConsulta:msgs, :frmConsulta:dtbConsulta" icon="ui-icon-search"/>
@@ -147,7 +150,14 @@
                             <f:selectItem itemLabel="Todas as empresas" itemValue="0" /> 
                             <f:selectItems value="#{funcionarioMB.tbEmpresas}" var="o" itemLabel="#{o.nmeEmpresa}/#{o.nmeAreaEmpresa}" itemValue="#{o.idtEmpresa}"/>  
                         </p:selectOneMenu>
-                    </p:column>                        
+                    </p:column>
+                       <p:column>  
+                            <h:outputText value="Login" />  
+                        </p:column> 
+                        <p:column>
+                            <p:password id="lgnFuncionario" value="#{funcionarioMB.selecionado.lgnFuncionario}"  size="50"/>  
+                        </p:column> 
+                        
                         <p:column>  
                             <h:outputText value="Senha (Redefinir)" />  
                         </p:column> 
@@ -155,7 +165,7 @@
                             <p:password id="pswFuncionario" value="#{funcionarioMB.selecionado.pswFuncionario}"  size="50"/>  
                         </p:column>  
                         <p:column>
-                            <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{montadoraMB.salvar}" ajax="true"/>  
+                            <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{funcionarioMB.salvar}" ajax="true"/>  
                         </p:column>
                         <p:column>
                             <p:commandButton id="btnFechar" value="Fechar" icon="ui-icon-close" onclick="dlgEditarView.hide()"/>  
