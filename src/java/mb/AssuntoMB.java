@@ -60,7 +60,7 @@ public class AssuntoMB {
         setSelecionado(new TbAssunto());
         getSelecionado().setIdtAssunto(0);
         idtReuniao = 0;
-        idtPauta = 0;
+        idtPauta = 0;       
     }
 
     public void salvar() {

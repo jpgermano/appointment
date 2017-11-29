@@ -21,26 +21,40 @@
                     <p:column>
                         <p:commandButton value="Consultar" actionListener="#{reuniaoMB.filtrar()}" update=":frmConsulta:msgs, :frmConsulta:dtbConsulta" icon="ui-icon-search"/>
                     </p:column>
+                    <p:column>
+                        Local da reunião:
+                    </p:column>
+                    <p:column>
+                       <p:inputText size="30" maxlength="50" value="#{reuniaoMB.nmeLocalReuniao}"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandButton value="Consultar" actionListener="#{reuniaoMB.pesquisarPorData()}" update=":frmConsulta:msgs, :frmConsulta:dtbConsulta" icon="ui-icon-search"/>
+                    </p:column>
                 </p:panelGrid>
                 <br></br>
                 <p:dataTable id="dtbConsulta" var="reg" value="#{reuniaoMB.tbReunioes}" tableStyle="width:auto;" paginator="true" rows="5">  
 
                     <p:column headerText="Identificador" style="width:100px">  
                         <h:outputText value="#{reg.idtReuniao}" />  
-                    </p:column>  
-                    
-                    <p:column headerText="Nome local" style="width:300px">  
+                    </p:column>                     
+                    <p:column headerText="Local" style="width:300px">  
                         <h:outputText value="#{reg.nmeLocalReuniao}" />  
-                    </p:column>
-                    
+                    </p:column>                  
                     <p:column headerText="Próxima reunião" style="width:300px">  
-                        <p:calendar value="#{reg.dtaProxReuniao}" disabled="true"/>  
+                        <h:outputText value="#{reg.dtaProxReuniao}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
                     </p:column>  
-                    
                     <p:column headerText="Data" style="width:300px">  
-                        <p:calendar value="#{reg.dtaReuniao}" disabled="true"/>  
+                        <h:outputText value="#{reg.dtaReuniao}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
                     </p:column>
-                    
+                    <p:column headerText="Projeto" style="width:300px">  
+                        <h:outputText value="#{reg.tbProjeto.nmeProjeto}" />  
+                    </p:column>
+
+
                   
 
                     <p:column headerText="Operacao" style="width:400px">  
@@ -72,25 +86,50 @@
                             <p:inputText id="idtReuniao" value="#{reuniaoMB.selecionado.idtReuniao}" disabled="true" size="5"/>  
                         </p:column>
                         <p:column>
-                            <h:outputText value="Nome local:" />  
+                            <h:outputText value="Local:" />  
                         </p:column>
                         <p:column>
-                            <p:inputText id="nmeLocalReuniao" value="#{reuniaoMB.selecionado.nmeLocalReuniao}" size="50" required="true" requiredMessage="Nome é um campo obrigatório!"/>  
+                            <p:inputText id="nmeLocalReuniao" value="#{reuniaoMB.selecionado.nmeLocalReuniao}" size="50" required="true" requiredMessage="Local é um campo obrigatório!"/>  
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Objetivo: " />  
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="txtObjetivoReuniao" value="#{reuniaoMB.selecionado.txtObjReuniao}" size="50" required="true" requiredMessage="Objetivo é um campo obrigatório!"/>  
+                        </p:column>
+                        <p:column>  
+                            <h:outputText value="Data: " />  
+                        </p:column>  
+                        <p:column>
+                            <p:calendar id="dtaReuniao" value="#{reuniaoMB.selecionado.dtaReuniao}" pattern="MM/dd/yyyy"/>  
                         </p:column>
                         <p:column>  
                             <h:outputText value="Próxima reunião" />  
                         </p:column>  
                         <p:column>
-                            <p:calendar id="dtaProxReuniao" value="#{reuniaoMB.selecionado.dtaProxReuniao}" size="50"/>  
+                            <p:calendar id="dtaProxReuniao" value="#{reuniaoMB.selecionado.dtaProxReuniao}" pattern="MM/dd/yyyy"/>  
                         </p:column>
-                        <p:column>  
-                            <h:outputText value="Endereco" />  
-                        </p:column>  
+                         <p:column>
+                            <h:outputText value="Projeto: " />  
+                        </p:column>
                         <p:column>
-                            <p:calendar id="dtaReuniao" value="#{reuniaoMB.selecionado.dtaReuniao}" size="50"/>  
-                        </p:column>                    
-                  
-                     
+                            <p:selectOneMenu id="cmbProjeto" value="#{reuniaoMB.idtProjeto}" effect="fold" editable="false">
+                                <f:selectItem itemLabel="Escolha uma Projeto" itemValue="0" /> 
+                                <f:selectItems value="#{reuniaoMB.tbProjetos}" var="m" itemLabel="#{m.nmeProjeto}" itemValue="#{m.idtProjeto}"/>  
+                                <f:validateLongRange minimum="1"/>
+                            </p:selectOneMenu>  
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Pauta: " />  
+                        </p:column>
+                        <p:column>
+                            <p:selectOneMenu id="cmbPauta" value="#{reuniaoMB.idtPauta}" effect="fold" editable="false">
+                                <f:selectItem itemLabel="Escolha uma Pauta" itemValue="0" /> 
+                                <f:selectItems value="#{reuniaoMB.tbPautas}" var="m" itemLabel="#{m.ordPauta}/#{m.hraTempoPauta}" itemValue="#{m.idtPauta}"/>  
+                                <f:validateLongRange minimum="1"/>
+                            </p:selectOneMenu>  
+                        </p:column>
+                    
 
                         <p:column>
                             <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{reuniaoMB.salvar}" ajax="true"/>  

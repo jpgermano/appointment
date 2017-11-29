@@ -26,9 +26,10 @@ public class TbAssuntoDAO extends BaseDAO<TbAssunto> {
         return lista;
     }
 
+
     public List<TbAssunto> consultarPorReuniao(Integer idtReuniao) {
         List<TbAssunto> lista;
-        Query qy = hib.createQuery("SELECT obj FROM TbReuniao obj WHERE (0=? OR tbReuniao.idtReuniao=?) ORDER BY tbReuniao.nmeLocalReuniao");
+        Query qy = hib.createQuery("SELECT obj FROM TbAssunto obj WHERE (0=? OR tbReuniao.idtReuniao=?) ORDER BY tbReuniao.nmeLocalReuniao");
         qy.setInteger(0, idtReuniao);
         qy.setInteger(1, idtReuniao);
         lista = qy.list();

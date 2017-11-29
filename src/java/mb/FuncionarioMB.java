@@ -77,7 +77,6 @@ public class FuncionarioMB {
     public void novo() {
         setSelecionado(new TaFuncionario());
         getSelecionado().setIdtFuncionario(0);
-        nmePessoa = "";
         idtSetor= 0;
         idtCargo =0;
         idtEmpresa =0;
@@ -92,6 +91,8 @@ public class FuncionarioMB {
         selecionado.setTbCargo(tbCargoDAO.consultarPorIdt(idtCargo));
         TbSetorDAO tbSetorDAO = new TbSetorDAO();
         selecionado.setTbSetor(tbSetorDAO.consultarPorIdt(idtSetor));
+        TbPessoaDAO tbPessoaDAO = new TbPessoaDAO();
+        selecionado.setTbPessoa(tbPessoaDAO.consultarPorIdt(idtPessoa));
         TaFuncionarioDAO dao = new TaFuncionarioDAO();
         if (getSelecionado().getIdtFuncionario()== 0) {
             getSelecionado().setIdtFuncionario(null);

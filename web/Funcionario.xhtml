@@ -128,7 +128,7 @@
                         Setor:
                     </p:column>
                     <p:column>
-                        <p:selectOneMenu id="cmbSetorPar" value="#{funcionarioMB.idtSetorPar}" effect="fold" editable="false">
+                        <p:selectOneMenu id="cmbSetor" value="#{funcionarioMB.idtSetor}" effect="fold" editable="false">
                             <f:selectItem itemLabel="Todas os setores" itemValue="0" /> 
                             <f:selectItems value="#{funcionarioMB.tbSetores}" var="m" itemLabel="#{m.nmeSetor}" itemValue="#{m.idtSetor}"/>  
                         </p:selectOneMenu>
@@ -137,7 +137,7 @@
                         Cargo:
                     </p:column>
                     <p:column>
-                        <p:selectOneMenu id="cmbCargoPar" value="#{funcionarioMB.idtCargoPar}" effect="fold" editable="false">
+                        <p:selectOneMenu id="cmbCargo" value="#{funcionarioMB.idtCargo}" effect="fold" editable="false">
                             <f:selectItem itemLabel="Todas os cargos" itemValue="0" /> 
                             <f:selectItems value="#{funcionarioMB.tbCargos}" var="n" itemLabel="#{n.nmeCargo}" itemValue="#{n.idtCargo}"/>  
                         </p:selectOneMenu>
@@ -146,7 +146,7 @@
                         Empresa:
                     </p:column>
                     <p:column>
-                        <p:selectOneMenu id="cmbEmpresaPar" value="#{funcionarioMB.idtEmpresaPar}" effect="fold" editable="false">
+                        <p:selectOneMenu id="cmbEmpresa" value="#{funcionarioMB.idtEmpresa}" effect="fold" editable="false">
                             <f:selectItem itemLabel="Todas as empresas" itemValue="0" /> 
                             <f:selectItems value="#{funcionarioMB.tbEmpresas}" var="o" itemLabel="#{o.nmeEmpresa}/#{o.nmeAreaEmpresa}" itemValue="#{o.idtEmpresa}"/>  
                         </p:selectOneMenu>
@@ -184,4 +184,3 @@
         </p:panel>
     </ui:define>
 </ui:composition>
-
