@@ -25,6 +25,17 @@ public class TbAssuntoDAO extends BaseDAO<TbAssunto> {
         lista = qy.list();
         return lista;
     }
+    public List<TbAssunto> consultarPorPautaAssunto(Integer idtPauta, String txtAssunto) {
+        List<TbAssunto> lista;
+        Query qy = hib.createQuery("SELECT obj FROM TbAssunto obj "
+                + "WHERE (0=? OR tbPauta.idtPauta=?) AND txtAssunto LIKE ?"
+                + "ORDER BY tbPauta.txtPauta, txtAssunto");
+        qy.setInteger(0, idtPauta);
+        qy.setInteger(1, idtPauta);
+        qy.setString(2, "%" + txtAssunto + "%");
+        lista = qy.list();
+        return lista;
+    }
 
 
     public List<TbAssunto> consultarPorReuniao(Integer idtReuniao) {

@@ -61,20 +61,10 @@ public class ParticipantesMB {
     public void novo() {
         setSelecionado(new TaParticipantes());
         getSelecionado().setIdtParticipantes(0);
-        idtFuncao = 0;
-        idtFuncionario = 0;
-        idtReuniao =0;
 
     }
 
     public void salvar() {   
-        TbReuniaoDAO tbReuniaoDAO = new TbReuniaoDAO();
-        getSelecionado().setTbReuniao(tbReuniaoDAO.consultarPorIdt(getIdtReuniao()));
-        TbFuncaoDAO tbFuncaoDAO = new TbFuncaoDAO();
-        getSelecionado().setTbFuncao(tbFuncaoDAO.consultarPorIdt(getIdtFuncao()));
-        TaFuncionarioDAO taFuncionarioDAO = new TaFuncionarioDAO();
-        getSelecionado().setTaFuncionario(taFuncionarioDAO.consultarPorIdt(getIdtFuncionario()));
-
         TaParticipantesDAO dao = new TaParticipantesDAO();
         if (getSelecionado().getIdtParticipantes()== 0) {
             getSelecionado().setIdtParticipantes(null);
