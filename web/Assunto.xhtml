@@ -99,17 +99,14 @@
                         </p:column>
                         <p:column>
                             <p:inputText id="idtAssunto" value="#{assuntoMB.selecionado.idtAssunto}" disabled="true" size="5"/>  
-                        </p:column>
+                        </p:column>                      
                         <p:column>
-                            <h:outputText value="Reuniao:" />  
+                            <h:outputText value="Reuniao: " />  
                         </p:column>
-                        <p:column>
-                            <p:selectOneMenu id="cmbReuniao" value="#{assuntoMB.idtReuniao}" effect="fold" editable="false">
-                                <f:selectItem itemLabel="Escolha uma Reuniao" itemValue="0" /> 
-                                <f:selectItems value="#{assuntoMB.tbReuniaos}" var="o" itemLabel="#{o.nmeLocalReuniao}/#{o.dtaReuniao}" itemValue="#{o.idtReuniao}"/>  
-                                <f:validateLongRange minimum="1"/>
-                            </p:selectOneMenu>  
-                        </p:column>
+                        <p:selectOneMenu id="codReuniao" value="#{assuntoMB.selecionado.tbReuniao}" style="width:150px" converter="reuniaoCV">
+                            <f:selectItems value="#{assuntoMB.tbReuniaos}" var="i" itemLabel="#{i.nmeLocalReuniao}" itemValue="#{i}"/>
+                        </p:selectOneMenu>
+                        
                         <p:column>
                             <h:outputText value="Início: " />  
                         </p:column>
@@ -140,13 +137,9 @@
                         <p:column>
                             <h:outputText value="Pauta extra: " />  
                         </p:column>
-                        <p:column>
-                            <p:selectOneMenu id="cmbPauta" value="#{assuntoMB.idtPauta}" effect="fold" editable="false">
-                                <f:selectItem itemLabel="Escolha uma pauta" itemValue="0" /> 
-                                <f:selectItems value="#{assuntoMB.tbPautas}" var="m" itemLabel="#{m.txtPauta}/#{m.ordPauta}" itemValue="#{m.idtPauta}"/>  
-                                <f:validateLongRange minimum="1"/>
-                            </p:selectOneMenu>  
-                        </p:column>
+                        <p:selectOneMenu id="codPauta" value="#{assuntoMB.selecionado.tbPauta}" style="width:150px" converter="pautaCV">
+                            <f:selectItems value="#{assuntoMB.tbPautas}" var="i" itemLabel="#{i.ordPauta}/#{i.txtPauta}" itemValue="#{i}"/>
+                        </p:selectOneMenu>
                         <p:column>
                             <h:outputText value="Texto pauta extra: " />  
                         </p:column>

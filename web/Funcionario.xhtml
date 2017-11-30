@@ -155,14 +155,14 @@
                             <h:outputText value="Login" />  
                         </p:column> 
                         <p:column>
-                            <p:password id="lgnFuncionario" value="#{funcionarioMB.selecionado.lgnFuncionario}"  size="50"/>  
+                            <p:inputText id="lgnFuncionario" value="#{funcionarioMB.selecionado.lgnFuncionario}"  size="50"/>  
                         </p:column> 
                         
                         <p:column>  
                             <h:outputText value="Senha (Redefinir)" />  
                         </p:column> 
                         <p:column>
-                            <p:password id="pswFuncionario" value="#{funcionarioMB.selecionado.pswFuncionario}"  size="50"/>  
+                            <p:inputText id="pswFuncionario" value="#{funcionarioMB.selecionado.pswFuncionario}"  size="50"/>  
                         </p:column>  
                         <p:column>
                             <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{funcionarioMB.salvar}" ajax="true"/>  
