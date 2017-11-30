@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="conteudo">
+        <p:panel header="Participantes">
+            <h:form id="frmConsulta">  
+                <p:growl id="msgs" showDetail="true"/>  
+                <p:panelGrid columns="3">
+                    <p:column>
+                        Reunião:
+                    </p:column>
+                    <p:column>
+                        <p:selectOneMenu id="cmbReuniaoPar" value="#{participantesMB.idtReuniaoPar}" effect="fold" editable="false">
+                            <f:selectItem itemLabel="Todas as reunioes" itemValue="0" /> 
+                            <f:selectItems value="#{participantesMB.tbReunioes}" var="m" itemLabel="#{m.nmeLocalReuniao}" itemValue="#{m.idtReuniao}"/>  
+                        </p:selectOneMenu>
+                    </p:column>
+                    <p:column>
+                        <p:commandButton value="Consultar" actionListener="#{participantesMB.filtrar()}" update=":frmConsulta:msgs, :frmConsulta:dtbConsulta" icon="ui-icon-search"/>
+                    </p:column>
+                </p:panelGrid>
+                <br></br>
+                <p:dataTable id="dtbConsulta" var="reg" value="#{participantesMB.taParticipantess}" tableStyle="width:auto;" paginator="true" rows="5">  
+
+                    <p:column headerText="Identificador" style="width:100px">  
+                        <h:outputText value="#{reg.idtParticipantes}" />  
+                    </p:column>  
+                    
+                    <p:column headerText="Reuniao" style="width:300px">  
+                        <h:outputText value="#{reg.tbReuniao.nmeLocalReuniao}" />  
+                    </p:column>
+                    
+                    <p:column headerText="Funcionario" style="width:300px">  
+                        <h:outputText value="#{reg.taFuncionario.tbPessoa.nmePessoa}" />  
+                    </p:column>
+                    
+                    <p:column headerText="Funcao" style="width:300px">  
+                        <h:outputText value="#{reg.tbFuncao.nmeFuncao}" />  
+                    </p:column> 
+                    
+                    <p:column headerText="Operacao" style="width:200px">  
+                        <p:panelGrid columns="2">  
+                            <p:column>
+                                <p:commandButton id="btnEditar" update=":frmEditar:pngEditar" oncomplete="PF('dlgEditarView').show()" icon="ui-icon-pencil">  
+                                    <f:setPropertyActionListener value="#{reg}" target="#{participantesMB.selecionado}" />  
+                                </p:commandButton>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton id="btnExcluir" style="text-align: center" update=":frmExcluir:dlgConfExclusao" oncomplete="PF('dlgConfExclusaoView').show()" icon="ui-icon-trash">  
+                                    <f:setPropertyActionListener value="#{reg}" target="#{participantesMB.selecionado}" />  
+                                </p:commandButton>  
+                            </p:column>
+                        </p:panelGrid>  
+                    </p:column>  
+                        
+                </p:dataTable>
+                <p:commandButton id="btnNovo" update=":frmEditar:pngEditar" oncomplete="PF('dlgEditarView').show()" icon="ui-icon-plusthick" value="Novo" actionListener="#{participantesMB.novo}" ajax="true"/>
+            </h:form>
+            <p:dialog header="Editar" widgetVar="dlgEditarView" resizable="false" id="dlgEditar"  
+                      showEffect="fade" hideEffect="explode" modal="true">  
+                <h:form id="frmEditar">
+                    <p:panelGrid id="pngEditar" columns="2" style="margin:0 auto;">  
+                        <p:column>
+                            <h:outputText value="Identificador:" />  
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="idtParticipantes" value="#{participantesMB.selecionado.idtParticipantes}" disabled="true" size="5"/>  
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Reuniao: " />  
+                        </p:column>
+                        <p:selectOneMenu id="codSetor" value="#{participantesMB.selecionado.tbReuniao}" style="width:150px" converter="reuniaoCV">
+                            <f:selectItems value="#{participantesMB.tbReunioes}" var="i" itemLabel="#{i.nmeLocalReuniao}" itemValue="#{i}"/>
+                        </p:selectOneMenu>
+                        <p:column>
+                            <h:outputText value="Funcionario: " />  
+                        </p:column>
+                        <p:selectOneMenu id="codCargo" value="#{participantesMB.selecionado.taFuncionario}" style="width:150px" converter="funcionarioCV">
+                            <f:selectItems value="#{participantesMB.taFuncionarios}" var="u" itemLabel="#{u.tbPessoa.nmePessoa}" itemValue="#{u}"/>
+                        </p:selectOneMenu>
+                        <p:column>
+                            <h:outputText value="Funcao: " />  
+                        </p:column>
+                        <p:selectOneMenu id="codEmpresa" value="#{participantesMB.selecionado.tbFuncao}" style="width:150px" converter="funcaoCV">
+                            <f:selectItems value="#{participantesMB.tbFuncoes}" var="v" itemLabel="#{v.nmeFuncao}" itemValue="#{v}"/>
+                        </p:selectOneMenu>
+              
+                        <p:column>
+                            <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{participantesMB.salvar}" ajax="true"/>  
+                        </p:column>
+                        <p:column>
+                            <p:commandButton id="btnFechar" value="Fechar" icon="ui-icon-close" onclick="dlgEditarView.hide()"/>  
+                        </p:column>
+                    </p:panelGrid>  
+                </h:form>
+            </p:dialog>  
+
+            <h:form id="frmExcluir">
+                <p:confirmDialog id="dlgConfExclusao" message="Tem certeza que deseja excluir (#{participantesMB.selecionado.taFuncionario.tbPessoa.nmePessoa})?"  
+                                 header="Exclusão de Registro" severity="alert" widgetVar="dlgConfExclusaoView">  
+                    <p:commandButton id="btnConfirm" value="Sim" update=":frmConsulta:dtbConsulta, :frmConsulta:msgs" oncomplete="PF('dlgConfExclusaoView').hide()" actionListener="#{participantesMB.excluir}" />  
+                    <p:commandButton id="btnDecline" value="Não" onclick="PF('dlgConfExclusaoView').hide()" type="button" />   
+                </p:confirmDialog> 
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>

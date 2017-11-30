@@ -23,30 +23,14 @@ import javax.faces.context.FacesContext;
 public class ReuniaoMB {
 
     private TbReuniao selecionado;
-    private TbReuniao novo;
     private List<TbReuniao> tbReunioes;
     private Integer idtReuniao;
-    private List<TbAssunto> tbAssuntos;
-    private Integer idtAssuntoPar;
-    private Integer idtAssunto;
-    private List<TbCompromisso> tbCompromissos;
-    private Integer idtCompromisso;
     private List<TbProjeto> tbProjetos;
     private Integer idtProjeto;
     private Integer idtProjetoPar;
-    private List<TbPauta> tbPautas;
-    private Integer idtPauta;
-    private Integer idtPautaPar;
-    private List<TaParticipantes> taParticipantes;
-    private Integer idtParticipantes;
-    
     private Date dtaReuniao;
     private String nmeLocalReuniao; 
-    
-    private TbAssunto assunto;
-    private TbPauta pauta;
-    private TaParticipantes participantes;
-    private TbCompromisso compromisso;
+
 
     /**
      * Creates a new instance of ReuniaoMB
@@ -54,21 +38,10 @@ public class ReuniaoMB {
     public ReuniaoMB() {
         selecionado = new TbReuniao();
         nmeLocalReuniao = "";
-        idtAssuntoPar = 0;
         idtProjetoPar = 0;
-        idtPautaPar = 0;
 
         TbProjetoDAO tbProjetoDAO = new TbProjetoDAO();
         tbProjetos = tbProjetoDAO.consultarTodos();
-        TbAssuntoDAO tbAssuntoDAO = new TbAssuntoDAO();
-        tbAssuntos = tbAssuntoDAO.consultarTodos();
-        TbCompromissoDAO tbCompromissoDAO = new TbCompromissoDAO();
-        tbCompromissos = tbCompromissoDAO.consultarTodos();
-        TaParticipantesDAO taParticipantesDAO = new TaParticipantesDAO();
-        taParticipantes = taParticipantesDAO.consultarTodos();
-        TbPautaDAO tbPautaDAO = new TbPautaDAO();
-        tbPautas = tbPautaDAO.consultarTodos();
-        idtReuniao = 0;
         filtrar();
         
     }
@@ -87,22 +60,11 @@ public class ReuniaoMB {
         setSelecionado(new TbReuniao());
         getSelecionado().setIdtReuniao(0);
         idtProjeto = 0;
-        idtCompromisso = 0;
-        idtPauta = 0;
-        idtAssunto = 0;
-        nmeLocalReuniao = "";
     }
 
     public void salvar() {
         TbProjetoDAO tbProjetoDAO = new TbProjetoDAO();
         selecionado.setTbProjeto(tbProjetoDAO.consultarPorIdt(idtProjeto));
-
-        TbAssuntoDAO tbAssuntoDAO = new TbAssuntoDAO();
-        assunto = tbAssuntoDAO.consultarPorIdt(idtAssunto);
-        TbCompromissoDAO tbCompromissoDAO = new TbCompromissoDAO();
-        compromisso = tbCompromissoDAO.consultarPorIdt(idtCompromisso);
-        TaParticipantesDAO taParticipantesDAO = new TaParticipantesDAO();
-        participantes = taParticipantesDAO.consultarPorIdt(idtParticipantes);
         TbReuniaoDAO dao = new TbReuniaoDAO();
         if (getSelecionado().getIdtReuniao() == 0) {
             getSelecionado().setIdtReuniao(null);
@@ -144,34 +106,6 @@ public class ReuniaoMB {
     }
 
     /**
-     * @return the novo
-     */
-    public TbReuniao getNovo() {
-        return novo;
-    }
-
-    /**
-     * @param novo the novo to set
-     */
-    public void setNovo(TbReuniao novo) {
-        this.novo = novo;
-    }
-
-    /**
-     * @return the tbReunioes
-     */
-    public List<TbReuniao> getTbReunioes() {
-        return tbReunioes;
-    }
-
-    /**
-     * @param tbReunioes the tbReunioes to set
-     */
-    public void setTbReunioes(List<TbReuniao> tbReunioes) {
-        this.tbReunioes = tbReunioes;
-    }
-
-    /**
      * @return the idtReuniao
      */
     public Integer getIdtReuniao() {
@@ -183,76 +117,6 @@ public class ReuniaoMB {
      */
     public void setIdtReuniao(Integer idtReuniao) {
         this.idtReuniao = idtReuniao;
-    }
-
-    /**
-     * @return the tbAssuntos
-     */
-    public List<TbAssunto> getTbAssuntos() {
-        return tbAssuntos;
-    }
-
-    /**
-     * @param tbAssuntos the tbAssuntos to set
-     */
-    public void setTbAssuntos(List<TbAssunto> tbAssuntos) {
-        this.tbAssuntos = tbAssuntos;
-    }
-
-    /**
-     * @return the idtAssuntoPar
-     */
-    public Integer getIdtAssuntoPar() {
-        return idtAssuntoPar;
-    }
-
-    /**
-     * @param idtAssuntoPar the idtAssuntoPar to set
-     */
-    public void setIdtAssuntoPar(Integer idtAssuntoPar) {
-        this.idtAssuntoPar = idtAssuntoPar;
-    }
-
-    /**
-     * @return the idtAssunto
-     */
-    public Integer getIdtAssunto() {
-        return idtAssunto;
-    }
-
-    /**
-     * @param idtAssunto the idtAssunto to set
-     */
-    public void setIdtAssunto(Integer idtAssunto) {
-        this.idtAssunto = idtAssunto;
-    }
-
-    /**
-     * @return the tbCompromissos
-     */
-    public List<TbCompromisso> getTbCompromissos() {
-        return tbCompromissos;
-    }
-
-    /**
-     * @param tbCompromissos the tbCompromissos to set
-     */
-    public void setTbCompromissos(List<TbCompromisso> tbCompromissos) {
-        this.tbCompromissos = tbCompromissos;
-    }
-
-    /**
-     * @return the idtCompromisso
-     */
-    public Integer getIdtCompromisso() {
-        return idtCompromisso;
-    }
-
-    /**
-     * @param idtCompromisso the idtCompromisso to set
-     */
-    public void setIdtCompromisso(Integer idtCompromisso) {
-        this.idtCompromisso = idtCompromisso;
     }
 
     /**
@@ -298,76 +162,6 @@ public class ReuniaoMB {
     }
 
     /**
-     * @return the tbPautas
-     */
-    public List<TbPauta> getTbPautas() {
-        return tbPautas;
-    }
-
-    /**
-     * @param tbPautas the tbPautas to set
-     */
-    public void setTbPautas(List<TbPauta> tbPautas) {
-        this.tbPautas = tbPautas;
-    }
-
-    /**
-     * @return the idtPauta
-     */
-    public Integer getIdtPauta() {
-        return idtPauta;
-    }
-
-    /**
-     * @param idtPauta the idtPauta to set
-     */
-    public void setIdtPauta(Integer idtPauta) {
-        this.idtPauta = idtPauta;
-    }
-
-    /**
-     * @return the idtPautaPar
-     */
-    public Integer getIdtPautaPar() {
-        return idtPautaPar;
-    }
-
-    /**
-     * @param idtPautaPar the idtPautaPar to set
-     */
-    public void setIdtPautaPar(Integer idtPautaPar) {
-        this.idtPautaPar = idtPautaPar;
-    }
-
-    /**
-     * @return the taParticipantes
-     */
-    public List<TaParticipantes> getTaParticipantes() {
-        return taParticipantes;
-    }
-
-    /**
-     * @param taParticipantes the taParticipantes to set
-     */
-    public void setTaParticipantes(List<TaParticipantes> taParticipantes) {
-        this.taParticipantes = taParticipantes;
-    }
-
-    /**
-     * @return the idtParticipantes
-     */
-    public Integer getIdtParticipantes() {
-        return idtParticipantes;
-    }
-
-    /**
-     * @param idtParticipantes the idtParticipantes to set
-     */
-    public void setIdtParticipantes(Integer idtParticipantes) {
-        this.idtParticipantes = idtParticipantes;
-    }
-
-    /**
      * @return the dtaReuniao
      */
     public Date getDtaReuniao() {
@@ -396,60 +190,20 @@ public class ReuniaoMB {
     }
 
     /**
-     * @return the assunto
+     * @return the tbReunioes
      */
-    public TbAssunto getAssunto() {
-        return assunto;
+    public List<TbReuniao> getTbReunioes() {
+        return tbReunioes;
     }
 
     /**
-     * @param assunto the assunto to set
+     * @param tbReunioes the tbReunioes to set
      */
-    public void setAssunto(TbAssunto assunto) {
-        this.assunto = assunto;
+    public void setTbReunioes(List<TbReuniao> tbReunioes) {
+        this.tbReunioes = tbReunioes;
     }
 
-    /**
-     * @return the pauta
-     */
-    public TbPauta getPauta() {
-        return pauta;
-    }
 
-    /**
-     * @param pauta the pauta to set
-     */
-    public void setPauta(TbPauta pauta) {
-        this.pauta = pauta;
-    }
-
-    /**
-     * @return the participantes
-     */
-    public TaParticipantes getParticipantes() {
-        return participantes;
-    }
-
-    /**
-     * @param participantes the participantes to set
-     */
-    public void setParticipantes(TaParticipantes participantes) {
-        this.participantes = participantes;
-    }
-
-    /**
-     * @return the compromisso
-     */
-    public TbCompromisso getCompromisso() {
-        return compromisso;
-    }
-
-    /**
-     * @param compromisso the compromisso to set
-     */
-    public void setCompromisso(TbCompromisso compromisso) {
-        this.compromisso = compromisso;
-    }
     
     
 

@@ -48,7 +48,6 @@ public class FuncionarioMB {
      */
     public FuncionarioMB() {
         selecionado = new TaFuncionario();
-        nmePessoa="";
         
         idtCargoPar = 0;
         TbCargoDAO dao = new TbCargoDAO();
@@ -80,7 +79,6 @@ public class FuncionarioMB {
         idtSetor= 0;
         idtCargo =0;
         idtEmpresa =0;
-        idtPessoa =0;
 
     }
 
@@ -91,8 +89,7 @@ public class FuncionarioMB {
         selecionado.setTbCargo(tbCargoDAO.consultarPorIdt(idtCargo));
         TbSetorDAO tbSetorDAO = new TbSetorDAO();
         selecionado.setTbSetor(tbSetorDAO.consultarPorIdt(idtSetor));
-//        TbPessoaDAO tbPessoaDAO = new TbPessoaDAO();
-//        selecionado.setTbPessoa(tbPessoaDAO.consultarPorIdt(idtPessoa));
+
         TaFuncionarioDAO dao = new TaFuncionarioDAO();
         if (getSelecionado().getIdtFuncionario()== 0) {
             getSelecionado().setIdtFuncionario(null);
@@ -131,9 +128,7 @@ public class FuncionarioMB {
      */
     public void setSelecionado(TaFuncionario selecionado) {
         this.selecionado = selecionado;
-        idtCargo=selecionado.getTbCargo().getIdtCargo();
-        idtSetor=selecionado.getTbSetor().getIdtSetor();
-        idtEmpresa=selecionado.getTbEmpresa().getIdtEmpresa();
+
     }
 
     /**

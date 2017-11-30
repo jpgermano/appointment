@@ -105,13 +105,7 @@
                         </p:column>  
                         <p:column>
                             <p:inputText id="endPessoa" value="#{funcionarioMB.selecionado.tbPessoa.endPessoa}" size="50"/>  
-                        </p:column>                    
-                        <p:column>  
-                            <h:outputText value="Setor" />  
-                        </p:column>  
-                        <p:column>
-                            <p:inputText id="nmeSetor" value="#{funcionarioMB.selecionado.tbSetor.nmeSetor}"  size="50"/>  
-                        </p:column>                    
+                        </p:column>                                     
                         <p:column>  
                             <h:outputText value="Telefone" />  
                         </p:column>
@@ -124,33 +118,24 @@
                         <p:column>
                             <p:inputText id="emlPessoa" value="#{funcionarioMB.selecionado.tbPessoa.emlPessoa}"  size="50"/>  
                         </p:column>
-                    <p:column>
-                        Setor:
-                    </p:column>
-                    <p:column>
-                        <p:selectOneMenu id="cmbSetor" value="#{funcionarioMB.idtSetor}" effect="fold" editable="false">
-                            <f:selectItem itemLabel="Todas os setores" itemValue="0" /> 
-                            <f:selectItems value="#{funcionarioMB.tbSetores}" var="m" itemLabel="#{m.nmeSetor}" itemValue="#{m.idtSetor}"/>  
+                        <p:column>
+                            <h:outputText value="Setor: " />  
+                        </p:column>
+                        <p:selectOneMenu id="codSetor" value="#{funcionarioMB.selecionado.tbSetor}" style="width:150px" converter="setorCV">
+                            <f:selectItems value="#{funcionarioMB.tbSetores}" var="i" itemLabel="#{i.nmeSetor}" itemValue="#{i}"/>
                         </p:selectOneMenu>
-                    </p:column>
-                    <p:column>
-                        Cargo:
-                    </p:column>
-                    <p:column>
-                        <p:selectOneMenu id="cmbCargo" value="#{funcionarioMB.idtCargo}" effect="fold" editable="false">
-                            <f:selectItem itemLabel="Todas os cargos" itemValue="0" /> 
-                            <f:selectItems value="#{funcionarioMB.tbCargos}" var="n" itemLabel="#{n.nmeCargo}" itemValue="#{n.idtCargo}"/>  
+                        <p:column>
+                            <h:outputText value="Cargo: " />  
+                        </p:column>
+                        <p:selectOneMenu id="codCargo" value="#{funcionarioMB.selecionado.tbCargo}" style="width:150px" converter="cargoCV">
+                            <f:selectItems value="#{funcionarioMB.tbCargos}" var="u" itemLabel="#{u.nmeCargo}" itemValue="#{u}"/>
                         </p:selectOneMenu>
-                    </p:column>
-                    <p:column>
-                        Empresa:
-                    </p:column>
-                    <p:column>
-                        <p:selectOneMenu id="cmbEmpresa" value="#{funcionarioMB.idtEmpresa}" effect="fold" editable="false">
-                            <f:selectItem itemLabel="Todas as empresas" itemValue="0" /> 
-                            <f:selectItems value="#{funcionarioMB.tbEmpresas}" var="o" itemLabel="#{o.nmeEmpresa}/#{o.nmeAreaEmpresa}" itemValue="#{o.idtEmpresa}"/>  
+                        <p:column>
+                            <h:outputText value="Empresa: " />  
+                        </p:column>
+                        <p:selectOneMenu id="codEmpresa" value="#{funcionarioMB.selecionado.tbEmpresa}" style="width:150px" converter="empresaCV">
+                            <f:selectItems value="#{funcionarioMB.tbEmpresas}" var="v" itemLabel="#{v.nmeEmpresa}/#{v.nmeAreaEmpresa}" itemValue="#{v}"/>
                         </p:selectOneMenu>
-                    </p:column>
                        <p:column>  
                             <h:outputText value="Login" />  
                         </p:column> 

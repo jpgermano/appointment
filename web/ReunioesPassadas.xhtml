@@ -39,7 +39,10 @@
                     </p:column>                     
                     <p:column headerText="Local" style="width:300px">  
                         <h:outputText value="#{reg.nmeLocalReuniao}" />  
-                    </p:column>                  
+                    </p:column>
+                    <p:column headerText="Objetivo" style="width:300px">  
+                        <h:outputText value="#{reg.txtObjReuniao}" />  
+                    </p:column>  
                     <p:column headerText="Próxima reunião" style="width:300px">  
                         <h:outputText value="#{reg.dtaProxReuniao}">
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
@@ -109,26 +112,12 @@
                         <p:column>
                             <p:calendar id="dtaProxReuniao" value="#{reuniaoMB.selecionado.dtaProxReuniao}" pattern="MM/dd/yyyy"/>  
                         </p:column>
-                         <p:column>
+                        <p:column>
                             <h:outputText value="Projeto: " />  
                         </p:column>
-                        <p:column>
-                            <p:selectOneMenu id="cmbProjeto" value="#{reuniaoMB.idtProjeto}" effect="fold" editable="false">
-                                <f:selectItem itemLabel="Escolha uma Projeto" itemValue="0" /> 
-                                <f:selectItems value="#{reuniaoMB.tbProjetos}" var="m" itemLabel="#{m.nmeProjeto}" itemValue="#{m.idtProjeto}"/>  
-                                <f:validateLongRange minimum="1"/>
-                            </p:selectOneMenu>  
-                        </p:column>
-                        <p:column>
-                            <h:outputText value="Pauta: " />  
-                        </p:column>
-                        <p:column>
-                            <p:selectOneMenu id="cmbPauta" value="#{reuniaoMB.idtPauta}" effect="fold" editable="false">
-                                <f:selectItem itemLabel="Escolha uma Pauta" itemValue="0" /> 
-                                <f:selectItems value="#{reuniaoMB.tbPautas}" var="m" itemLabel="#{m.ordPauta}/#{m.hraTempoPauta}" itemValue="#{m.idtPauta}"/>  
-                                <f:validateLongRange minimum="1"/>
-                            </p:selectOneMenu>  
-                        </p:column>
+                        <p:selectOneMenu id="codProjeto" value="#{reuniaoMB.selecionado.tbProjeto}" style="width:300px" converter="projetoCV">
+                            <f:selectItems value="#{reuniaoMB.tbProjetos}" var="i" itemLabel="#{i.nmeProjeto}" itemValue="#{i}"/>
+                        </p:selectOneMenu>
                     
 
                         <p:column>

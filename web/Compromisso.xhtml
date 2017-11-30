@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="conteudo">
+        <p:panel header="Compromisso">
+            <h:form id="frmConsulta">  
+                <p:growl id="msgs" showDetail="true"/>  
+                <p:panelGrid columns="2">
+                    <p:column>
+                        Assunto:
+                    </p:column>
+                    <p:column>
+                        <p:selectOneMenu id="cmbReuniaoPar" value="#{compromissoMB.idtAssuntoPar}" style="width:300px" effect="fold" editable="false">
+                            <f:selectItem itemLabel="Todas as assuntos" itemValue="0" /> 
+                            <f:selectItems value="#{compromissoMB.tbAssuntos}" var="m" itemLabel="#{m.txtAssunto}/#{m.txtPautaExtraAssunto}" itemValue="#{m.idtAssunto}"/>  
+                        </p:selectOneMenu>
+                    </p:column>
+                    <p:column>
+                        Descrição do compromisso:
+                    </p:column>
+                    <p:column>
+                        <p:inputText size="30" maxlength="50" value="#{compromissoMB.dscCompromisso}"/>
+                    </p:column>
+                    <p:column colspan="2">
+                        <p:commandButton value="Consultar" actionListener="#{compromissoMB.filtrar}" update=":frmConsulta:msgs, :frmConsulta:dtbConsulta" icon="ui-icon-search"/>
+                    </p:column>
+                </p:panelGrid>
+
+                <p:dataTable id="dtbConsulta" var="reg" value="#{compromissoMB.tbCompromissos}" tableStyle="width:auto;" paginator="true" rows="4">  
+                    <p:column headerText="Identificador" style="width:100px">  
+                        <h:outputText value="#{reg.idtCompromisso}" />  
+                    </p:column>  
+                    <p:column headerText="Responsável" style="width:100px">  
+                        <h:outputText value="#{reg.taParticipantes.taFuncionario.tbPessoa.nmePessoa}" />  
+                    </p:column>  
+                    <p:column headerText="Data" style="width:300px">  
+                        <h:outputText value="#{reg.dtaCompromisso}"> 
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>  
+                    <p:column headerText="Descrição" style="width:100px">  
+                        <h:outputText value="#{reg.dscCompromisso}"/>
+                    </p:column>            
+                    <p:column headerText="Assunto" style="width:100px">  
+                        <h:outputText value="#{reg.tbAssunto.txtAssunto}" /> 
+                    </p:column>
+                   
+                    <p:column headerText="Opera��o" style="width:200px">  
+                        <p:panelGrid columns="2">  
+                            <p:column>
+                                <p:commandButton id="btnEditar" update=":frmEditar:pngEditar" oncomplete="PF('dlgEditarView').show()" icon="ui-icon-pencil" value="Editar">  
+                                    <f:setPropertyActionListener value="#{reg}" target="#{compromissoMB.selecionado}" />  
+                                </p:commandButton>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton id="btnExcluir" update=":frmExcluir:dlgConfExclusao" oncomplete="PF('dlgConfExclusaoView').show()" icon="ui-icon-trash" value="Excluir">  
+                                    <f:setPropertyActionListener value="#{reg}" target="#{compromissoMB.selecionado}" />  
+                                </p:commandButton>  
+                            </p:column>
+                        </p:panelGrid>  
+                    </p:column>  
+
+                </p:dataTable>  
+
+                <p:commandButton id="btnNovo" update=":frmEditar:pngEditar" oncomplete="PF('dlgEditarView').show()" icon="ui-icon-plusthick" value="Novo" actionListener="#{compromissoMB.novo}" ajax="true"/> 
+            </h:form> 
+
+            <p:dialog header="Editar" widgetVar="dlgEditarView" resizable="false" id="dlgEditar"  
+                      showEffect="fade" hideEffect="explode" modal="true">  
+                <h:form id="frmEditar">
+                    <p:panelGrid id="pngEditar" columns="2" style="margin:0 auto;">  
+                        <p:column>
+                            <h:outputText value="Identificador:" />  
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="idtCompromisso" value="#{compromissoMB.selecionado.idtCompromisso}" disabled="true" size="5"/>  
+                        </p:column>                      
+                        <p:column>
+                            <h:outputText value="Responsável: " />  
+                        </p:column>
+                        <p:selectOneMenu id="codResponsavel" value="#{compromissoMB.selecionado.taParticipantes}" style="width:150px" converter="participantesCV">
+                            <f:selectItems value="#{compromissoMB.taParticipantess}" var="i" itemLabel="#{i.taFuncionario.tbPessoa.nmePessoa}" itemValue="#{i}"/>
+                        </p:selectOneMenu>                     
+                        <p:column>
+                            <h:outputText value="Data: " />  
+                        </p:column>
+                        <p:column>
+                            <p:calendar id="dtaCompromisso" value="#{compromissoMB.selecionado.dtaCompromisso}" pattern="MM/dd/yyyy" />
+                        </p:column>
+                        <p:column >
+                            <h:outputText value="Descrição:" />  
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="dscCompromisso" value="#{compromissoMB.selecionado.dscCompromisso}" />
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Assunto: " />  
+                        </p:column>
+                        <p:selectOneMenu id="codAssunto" value="#{compromissoMB.selecionado.tbAssunto}" style="width:300px" converter="assuntoCV">
+                            <f:selectItems value="#{compromissoMB.tbAssuntos}" var="i" itemLabel="#{i.txtAssunto}" itemValue="#{i}"/>
+                        </p:selectOneMenu>
+                       
+                        <p:column>
+                            <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{compromissoMB.salvar}" ajax="true"/>  
+                        </p:column>
+                        <p:column>
+                            <p:commandButton id="btnFechar" value="Fechar" icon="ui-icon-close" onclick="dlgEditarView.hide()"/>  
+                        </p:column>
+                    </p:panelGrid>  
+                </h:form>
+            </p:dialog>  
+
+            <h:form id="frmExcluir">
+                <p:confirmDialog id="dlgConfExclusao" message="Tem certeza que deseja excluir (#{compromissoMB.selecionado.dscCompromisso}/#{compromissoMB.selecionado.dtaCompromisso})?"  
+                                 header="Exclus�o de Registro" severity="alert" widgetVar="dlgConfExclusaoView">  
+                    <p:commandButton id="btnConfirm" value="Sim" update=":frmConsulta:dtbConsulta, :frmConsulta:msgs" oncomplete="PF('dlgConfExclusaoView').hide()" actionListener="#{compromissoMB.excluir}" />  
+                    <p:commandButton id="btnDecline" value="N�o" onclick="PF('dlgConfExclusaoView').hide()" type="button" />   
+                </p:confirmDialog> 
+            </h:form>
+
+        </p:panel>
+    </ui:define>
+
+</ui:composition>
