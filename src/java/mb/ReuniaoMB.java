@@ -9,6 +9,7 @@ import model.*;
 
 import java.util.List;
 import java.util.Date;
+import javafx.scene.control.Tab;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -31,7 +32,6 @@ public class ReuniaoMB {
     private Date dtaReuniao;
     private String nmeLocalReuniao; 
 
-
     /**
      * Creates a new instance of ReuniaoMB
      */
@@ -42,8 +42,13 @@ public class ReuniaoMB {
 
         TbProjetoDAO tbProjetoDAO = new TbProjetoDAO();
         tbProjetos = tbProjetoDAO.consultarTodos();
+        
         filtrar();
         
+    }
+    public void pesquisarTodos(){
+        TbReuniaoDAO dao = new TbReuniaoDAO();
+        tbReunioes = dao.consultarTodos();
     }
 
     public void filtrar() {
@@ -61,21 +66,28 @@ public class ReuniaoMB {
         getSelecionado().setIdtReuniao(0);
         idtProjeto = 0;
     }
+    
 
-    public void salvar() {
+    public TbReuniao salvar() {
         TbProjetoDAO tbProjetoDAO = new TbProjetoDAO();
         selecionado.setTbProjeto(tbProjetoDAO.consultarPorIdt(idtProjeto));
         TbReuniaoDAO dao = new TbReuniaoDAO();
+        TbReuniao retorno = new TbReuniao();
+        Tab t = new Tab();
         if (getSelecionado().getIdtReuniao() == 0) {
             getSelecionado().setIdtReuniao(null);
-            dao.incluir(getSelecionado());
+            retorno = dao.incluir(getSelecionado());
         } else {
-            dao.juntar(getSelecionado());
+            retorno = dao.juntar(getSelecionado());
         }
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Resultado da Gravação", "Atualização efetivada na base de dados.");
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        filtrar();
+        pesquisarTodos();
+        return retorno;
     }
+    
+    
+    
 
     public void excluir() {
         TbReuniaoDAO dao = new TbReuniaoDAO();
