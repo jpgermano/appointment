@@ -76,20 +76,12 @@ public class FuncionarioMB {
     public void novo() {
         setSelecionado(new TaFuncionario());
         getSelecionado().setIdtFuncionario(0);
-        idtSetor= 0;
-        idtCargo =0;
-        idtEmpresa =0;
+        getSelecionado().setFlgAtivo(true);
+
 
     }
 
     public void salvar() {
-        TbEmpresaDAO tbEmpresaDAO = new TbEmpresaDAO();
-        selecionado.setTbEmpresa(tbEmpresaDAO.consultarPorIdt(idtEmpresa));
-        TbCargoDAO tbCargoDAO = new TbCargoDAO();
-        selecionado.setTbCargo(tbCargoDAO.consultarPorIdt(idtCargo));
-        TbSetorDAO tbSetorDAO = new TbSetorDAO();
-        selecionado.setTbSetor(tbSetorDAO.consultarPorIdt(idtSetor));
-
         TaFuncionarioDAO dao = new TaFuncionarioDAO();
         if (getSelecionado().getIdtFuncionario()== 0) {
             getSelecionado().setIdtFuncionario(null);

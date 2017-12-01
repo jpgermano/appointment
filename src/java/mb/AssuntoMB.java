@@ -58,16 +58,10 @@ public class AssuntoMB {
 
     public void novo() {
         setSelecionado(new TbAssunto());
-        getSelecionado().setIdtAssunto(0);
-        idtReuniao = 0;
-        idtPauta = 0;       
+        getSelecionado().setIdtAssunto(0);    
     }
 
     public void salvar() {
-        TbReuniaoDAO tbReuniaoDAO = new TbReuniaoDAO();
-        selecionado.setTbReuniao(tbReuniaoDAO.consultarPorIdt(idtReuniao));
-        TbPautaDAO tbPautaDAO = new TbPautaDAO();
-        selecionado.setTbPauta(tbPautaDAO.consultarPorIdt(idtPauta));
         TbAssuntoDAO dao = new TbAssuntoDAO();
         if (getSelecionado().getIdtAssunto() == 0) {
             getSelecionado().setIdtAssunto(null);
@@ -75,6 +69,7 @@ public class AssuntoMB {
         } else {
             dao.juntar(getSelecionado());
         }
+        
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Resultado da Gravação", "Atualização efetivada na base de dados.");
         FacesContext.getCurrentInstance().addMessage(null, msg);
         filtrar();
@@ -90,8 +85,8 @@ public class AssuntoMB {
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Resultado da Exclusao", "Não foi possível excluir.");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
             }
-        }
-        filtrar();
+        } 
+       filtrar();
     }
 
     /**

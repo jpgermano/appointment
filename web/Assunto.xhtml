@@ -126,13 +126,13 @@
                         </p:column>
                         <p:column>
                             
-                             <p:calendar id="hraDuracaoAssunto" value="#{assuntoMB.selecionado.hraDuracaoAssunto }" pattern="MM/dd/yyyy HH:mm:ss" />
+                             <p:calendar id="hraDuracaoAssunto" value="#{assuntoMB.selecionado.hraDuracaoAssunto}" pattern="MM/dd/yyyy HH:mm:ss" />
                         </p:column>    
                         <p:column>
                             <h:outputText value="Texto: " />  
                         </p:column>
                         <p:column>
-                            <p:inputText id="txtAssunto" value="#{assuntoMB.selecionado.txtAssunto }" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
+                            <p:inputText id="txtAssunto" value="#{assuntoMB.selecionado.txtAssunto}" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
                         </p:column>
                         <p:column>
                             <h:outputText value="Pauta extra: " />  
@@ -144,7 +144,7 @@
                             <h:outputText value="Texto pauta extra: " />  
                         </p:column>
                         <p:column>
-                            <p:inputText id="txtPautaExtraAssunto" value="#{assuntoMB.selecionado.txtPautaExtraAssunto }" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
+                            <p:inputText id="txtPautaExtraAssunto" value="#{assuntoMB.selecionado.txtPautaExtraAssunto}" size="50" required="true" requiredMessage="Nome � um campo obrigat�rio!"/>  
                         </p:column>
                         <p:column>
                             <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{assuntoMB.salvar}" ajax="true"/>  

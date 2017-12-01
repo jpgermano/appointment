@@ -57,15 +57,10 @@ public class CompromissoMB {
     public void novo() {
         setSelecionado(new TbCompromisso());
         getSelecionado().setIdtCompromisso(0);
-        setIdtAssunto((Integer) 0);
-        setIdtParticipantes((Integer) 0);       
+    
     }
 
     public void salvar() {       
-        TbAssuntoDAO tbAssuntoDAO = new TbAssuntoDAO();
-        getSelecionado().setTbAssunto(tbAssuntoDAO.consultarPorIdt(getIdtAssunto()));
-        TaParticipantesDAO taParticipantesDAO = new TaParticipantesDAO();
-        getSelecionado().setTaParticipantes(taParticipantesDAO.consultarPorIdt(getIdtParticipantes()));
         TbCompromissoDAO dao = new TbCompromissoDAO();
         if (getSelecionado().getIdtCompromisso() == 0) {
             getSelecionado().setIdtCompromisso(null);

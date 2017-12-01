@@ -82,8 +82,74 @@
                     </p:column>  
                         
                 </p:dataTable>
-                <p:commandButton id="btnNovo" update=":frmEditar:pngEditar" oncomplete="PF('dlgEditarView').show()" icon="ui-icon-plusthick" value="Novo" actionListener="#{funcionarioMB.novo}" ajax="true"/>
+                <p:commandButton id="btnNovo" update=":frmNovo:pngNovo" oncomplete="PF('dlgNovoView').show()" icon="ui-icon-plusthick" value="Novo" actionListener="#{funcionarioMB.novo}" ajax="true"/>
             </h:form>
+                       <p:dialog header="Novo" widgetVar="dlgNovoView" resizable="false" id="dlgNovo"  
+                      showEffect="fade" hideEffect="explode" modal="true">  
+                <h:form id="frmNovo">
+                    <p:panelGrid id="pngNovo" columns="2" style="margin:0 auto;">  
+                        <p:column>
+                            <h:outputText value="Identificador:" />  
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="idtFuncionario" value="#{funcionarioMB.selecionado.idtFuncionario}" disabled="true" size="5"/>  
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Pessoa " />  
+                        </p:column>
+                        <p:selectOneMenu id="codPessoa" value="#{funcionarioMB.selecionado.tbPessoa}" style="width:150px" converter="pessoaCV">
+                            <f:selectItems value="#{funcionarioMB.tbPessoas}" var="p" itemLabel="#{p.nmePessoa}" itemValue="#{p}"/>
+                        </p:selectOneMenu>
+                        <p:column>
+                            <h:outputText value="Setor: " />  
+                        </p:column>
+                        <p:selectOneMenu id="codSetor" value="#{funcionarioMB.selecionado.tbSetor}" style="width:150px" converter="setorCV">
+                            <f:selectItems value="#{funcionarioMB.tbSetores}" var="i" itemLabel="#{i.nmeSetor}" itemValue="#{i}"/>
+                        </p:selectOneMenu>
+                        <p:column>
+                            <h:outputText value="Cargo: " />  
+                        </p:column>
+                        <p:selectOneMenu id="codCargo" value="#{funcionarioMB.selecionado.tbCargo}" style="width:150px" converter="cargoCV">
+                            <f:selectItems value="#{funcionarioMB.tbCargos}" var="u" itemLabel="#{u.nmeCargo}" itemValue="#{u}"/>
+                        </p:selectOneMenu>
+                        <p:column>
+                            <h:outputText value="Empresa: " />  
+                        </p:column>
+                        <p:selectOneMenu id="codEmpresa" value="#{funcionarioMB.selecionado.tbEmpresa}" style="width:150px" converter="empresaCV">
+                            <f:selectItems value="#{funcionarioMB.tbEmpresas}" var="v" itemLabel="#{v.nmeEmpresa}/#{v.nmeAreaEmpresa}" itemValue="#{v}"/>
+                        </p:selectOneMenu>
+                       <p:column>  
+                            <h:outputText value="Login" />  
+                        </p:column> 
+                        <p:column>
+                            <p:inputText id="lgnFuncionario" value="#{funcionarioMB.selecionado.lgnFuncionario}"  size="50"/>  
+                        </p:column> 
+                        
+                        <p:column>  
+                            <h:outputText value="Senha (Redefinir)" />  
+                        </p:column> 
+                        <p:column>
+                            <p:inputText id="pswFuncionario" value="#{funcionarioMB.selecionado.pswFuncionario}"  size="50"/>  
+                        </p:column>
+                        <p:column>
+                        <h:outputText value="Status do funcionário" />  
+                        </p:column>
+                        <p:column>
+                            <p:selectOneRadio id="flgAtivo" value="#{funcionarioMB.selecionado.flgAtivo}">
+                            <f:selectItem itemLabel="Ativo" itemValue="#{true}"  />
+                            <f:selectItem itemLabel="Inativo" itemValue="#{false}" /> 
+                        </p:selectOneRadio>
+                        </p:column>
+                        <p:column>
+                            <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{funcionarioMB.salvar}" ajax="true"/>  
+                        </p:column>
+                        <p:column>
+                            <p:commandButton id="btnFechar" value="Fechar" icon="ui-icon-close" onclick="dlgEditarView.hide()"/>  
+                        </p:column>
+                    </p:panelGrid>  
+                </h:form>
+            </p:dialog>  
+            
             <p:dialog header="Editar" widgetVar="dlgEditarView" resizable="false" id="dlgEditar"  
                       showEffect="fade" hideEffect="explode" modal="true">  
                 <h:form id="frmEditar">
@@ -148,7 +214,16 @@
                         </p:column> 
                         <p:column>
                             <p:inputText id="pswFuncionario" value="#{funcionarioMB.selecionado.pswFuncionario}"  size="50"/>  
-                        </p:column>  
+                        </p:column>
+                        <p:column>
+                        <h:outputText value="Status do funcionário" />  
+                        </p:column>
+                        <p:column>
+                            <p:selectOneRadio id="flgAtivo" value="#{funcionarioMB.selecionado.flgAtivo}">
+                            <f:selectItem itemLabel="Ativo" itemValue="#{true}"  />
+                            <f:selectItem itemLabel="Inativo" itemValue="#{false}" /> 
+                        </p:selectOneRadio>
+                        </p:column>
                         <p:column>
                             <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{funcionarioMB.salvar}" ajax="true"/>  
                         </p:column>
