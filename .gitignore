@@ -10,3 +10,8 @@ nbproject/private/private.properties
 nbproject/ant-deploy.xml
 nbproject/private/private.properties
 *.properties
+nbproject/private/private.properties
+nbproject/ant-deploy.xml
+*.properties
+*.properties
+*.xml
