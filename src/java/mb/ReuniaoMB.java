@@ -9,7 +9,6 @@ import model.*;
 
 import java.util.List;
 import java.util.Date;
-import javafx.scene.control.Tab;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -73,7 +72,6 @@ public class ReuniaoMB {
         selecionado.setTbProjeto(tbProjetoDAO.consultarPorIdt(idtProjeto));
         TbReuniaoDAO dao = new TbReuniaoDAO();
         TbReuniao retorno = new TbReuniao();
-        Tab t = new Tab();
         if (getSelecionado().getIdtReuniao() == 0) {
             getSelecionado().setIdtReuniao(null);
             retorno = dao.incluir(getSelecionado());
