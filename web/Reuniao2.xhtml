@@ -118,21 +118,43 @@
                         </p:column>
                         <p:selectOneMenu id="codProjeto" value="#{reuniao2MB.selecionado.tbProjeto}" style="width:300px" converter="projetoCV">
                             <f:selectItems value="#{reuniao2MB.tbProjetos}" var="i" itemLabel="#{i.nmeProjeto}" itemValue="#{i}"/>
-                        </p:selectOneMenu>
-                        <h3>Passos</h3>
-                        <p:steps>
-                            <p:menuitem value="Reunão"></p:menuitem>
-                            <p:menuitem value="Participantes"></p:menuitem>
-                            <p:menuitem value="Pauta"></p:menuitem>
-                            <p:menuitem value="Assunto"></p:menuitem>
-                            <p:menuitem value="Compromisso"></p:menuitem>
-                        </p:steps>
+                        </p:selectOneMenu>  
                         <p:column>
                             <p:commandButton id="btnSalvar" update=":frmNovo:pngNovo, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{reuniao2MB.salvar}" ajax="true"/>  
+                        </p:column> 
+                        <p:column>
+                            <p:commandButton id="bntParticipantes" update=":frmNovo:pngNovo" value="Participantes" ajax="true">
+                                <p:ajax listener="#{reuniao2MB.onReuniaoChange}" update="codReuniao"/> 
+                            </p:commandButton>
+                               
+                        </p:column>                       
+                       <p:column>
+                            <h:outputText value="Identificador do projeto:" />  
                         </p:column>
                         <p:column>
-                            <p:commandButton id="btnParticipantes" oncomplete="PF('dlgParticipantesView').show()" icon="ui-icon-arrowthick-1-e" value="Participantes" actionListener="#{reuniao2MB.participantesNovo}" ajax="true"/>
+                            <p:inputText id="idtParticipantes" value="#{reuniao2MB.selecionadoParticipantes.idtParticipantes}" disabled="true" size="5"/>  
                         </p:column>
+                        <p:column>
+                            <h:outputText value="Reuniao: " />  
+                        </p:column>                        
+                        <p:selectOneMenu id="codReuniao" value="#{reuniao2MB.selecionadoParticipantes.tbReuniao}" style="width:150px" >
+                            <f:selectItem itemLabel="Selecione a reunião" itemValue="" />
+                            <f:selectItems value="#{reuniao2MB.tbReunioes}" var="m" itemLabel="#{m.nmeLocalReuniao}" itemValue="#{m.idtReuniao}"/>
+                        </p:selectOneMenu>
+                        <p:column>
+                            <h:outputText value="Funcionario: " />  
+                        </p:column>
+                        <p:selectOneMenu id="codCargo" value="#{reuniao2MB.selecionadoParticipantes.taFuncionario}" style="width:150px" converter="funcionarioCV">
+                            <f:selectItems value="#{reuniao2MB.taFuncionarios}" var="u" itemLabel="#{u.tbPessoa.nmePessoa}" itemValue="#{u}"/>
+                        </p:selectOneMenu>
+                        <p:column>
+                            <h:outputText value="Funcao: " />  
+                        </p:column>
+                        <p:selectOneMenu id="codEmpresa" value="#{reuniao2MB.selecionadoParticipantes.tbFuncao}" style="width:150px" converter="funcaoCV">
+                            <f:selectItems value="#{reuniao2MB.tbFuncoes}" var="v" itemLabel="#{v.nmeFuncao}" itemValue="#{v}"/>
+                        </p:selectOneMenu>
+                        
+
                     </p:panelGrid>  
                 </h:form>
             </p:dialog>

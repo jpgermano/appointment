@@ -4,7 +4,6 @@
  */
 package mb;
 
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import dao.*;
 import model.*;
 
@@ -23,6 +22,8 @@ import javax.servlet.http.HttpSession;
 @ManagedBean
 @ViewScoped
 public class Reuniao2MB {
+
+
 
     private TbReuniao selecionado;
     private List<TbReuniao> tbReunioes;
@@ -69,6 +70,8 @@ public class Reuniao2MB {
     //private List<TaParticipantes> taParticipantess;
     private Integer idtParticipantes; // Usado na combo de novo e edição
     
+    //
+    private String reuniao;
 
     /**
      * Creates a new instance of ReuniaoMB
@@ -121,7 +124,7 @@ public class Reuniao2MB {
         TbReuniao reuniao = (TbReuniao) sessaoReuniao.getAttribute("reuniao");
         setSelecionadoParticipantes(new TaParticipantes());
         getSelecionadoParticipantes().setIdtParticipantes(0);
-        getSelecionadoParticipantes().getTbReuniao().setIdtReuniao(reuniao.getIdtReuniao());
+        getSelecionadoParticipantes().getTbReuniao().setIdtReuniao(25);
 
     }
 
@@ -212,7 +215,17 @@ public class Reuniao2MB {
     }
     
     
-    
+    public void onReuniaoChange(){
+        HttpSession sessaoReuniao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        TbReuniao reuniaoo = (TbReuniao) sessaoReuniao.getAttribute("reuniao");
+         //if(idtReuniao !=null && !idtReuniao.equals("")){
+            TbReuniaoDAO dao = new TbReuniaoDAO();
+            setTbReunioes(dao.consultarPorNmeLocal(reuniaoo.getNmeLocalReuniao()));
+         //}else{
+            //TbReuniaoDAO dao = new TbReuniaoDAO();
+            //setTbReunioes(null);
+        //}
+    }
 
     public void excluir() {
         TbReuniaoDAO dao = new TbReuniaoDAO();
@@ -226,6 +239,20 @@ public class Reuniao2MB {
             }
         }
         filtrar();
+    }
+    
+        /**
+     * @return the reuniao
+     */
+    public String getReuniao() {
+        return reuniao;
+    }
+
+    /**
+     * @param reuniao the reuniao to set
+     */
+    public void setReuniao(String reuniao) {
+        this.reuniao = reuniao;
     }
 
     /**
