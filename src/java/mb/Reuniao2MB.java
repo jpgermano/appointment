@@ -70,8 +70,6 @@ public class Reuniao2MB {
     //private List<TaParticipantes> taParticipantess;
     private Integer idtParticipantes; // Usado na combo de novo e edição
     
-    //
-    private String reuniao;
 
     /**
      * Creates a new instance of ReuniaoMB
@@ -102,94 +100,6 @@ public class Reuniao2MB {
         TbReuniaoDAO dao = new TbReuniaoDAO();
         setTbReunioes(dao.consultarPorData(dtaReuniao));
     }
-    
-
-    //Parte 1
-    public void participantes(){
-        selecionadoParticipantes = new TaParticipantes();
-       
-        TbReuniaoDAO dao = new TbReuniaoDAO();
-        tbReunioes = dao.consultarTodos();
-        
-        TbFuncaoDAO tbFuncaoDAO = new TbFuncaoDAO();
-        tbFuncoes = tbFuncaoDAO.consultarTodos();
-        
-        TaFuncionarioDAO taFuncionarioDAO = new TaFuncionarioDAO();
-        taFuncionarios = taFuncionarioDAO.consultarTodos();
-
-    }
-    
-    public void participantesNovo(){
-        HttpSession sessaoReuniao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        TbReuniao reuniao = (TbReuniao) sessaoReuniao.getAttribute("reuniao");
-        setSelecionadoParticipantes(new TaParticipantes());
-        getSelecionadoParticipantes().setIdtParticipantes(0);
-        getSelecionadoParticipantes().getTbReuniao().setIdtReuniao(25);
-
-    }
-
-    
-    //Parte 2
-    public void pauta(){
-        selecionadoPauta = new TbPauta();
-        txtPauta = "";
-        TbReuniaoDAO dao = new TbReuniaoDAO();
-        tbReunioes = dao.consultarTodos();
-    }
-    
-    public void pautaNova(){
-        HttpSession sessaoReuniao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        TbReuniao reuniao = (TbReuniao) sessaoReuniao.getAttribute("reuniao");
-        setSelecionadoPauta(new TbPauta());
-        getSelecionadoPauta().setIdtPauta(0);
-        getSelecionadoPauta().getTbReuniao().setIdtReuniao(reuniao.getIdtReuniao());
-    }
-    
-    //Parte 3
-    public void assunto(){
-        selecionadoAssunto = new TbAssunto();
-        txtAssunto = "";
-        idtPautaPar = 0;
-        TbReuniaoDAO dao = new TbReuniaoDAO();
-        tbReunioes = dao.consultarTodos();
-        TbPautaDAO tbPautaDAO = new TbPautaDAO();
-        tbPautas = tbPautaDAO.consultarTodos();
-    }
-    public void assuntoNovo(){
-        HttpSession sessaoReuniao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        TbReuniao reuniao = (TbReuniao) sessaoReuniao.getAttribute("reuniao");
-        setSelecionadoAssunto(new TbAssunto());
-        getSelecionadoAssunto().setIdtAssunto(0);
-        getSelecionadoAssunto().getTbReuniao().setIdtReuniao(reuniao.getIdtReuniao());
-    }
-    public void assuntoSalvar(){
-        TbAssuntoDAO dao = new TbAssuntoDAO();
-        if (getSelecionadoAssunto().getIdtAssunto() == 0) {
-            getSelecionadoAssunto().setIdtAssunto(null);
-            dao.incluir(getSelecionadoAssunto());
-        } else {
-            dao.juntar(getSelecionadoAssunto());
-        }
-        
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Resultado da Gravação", "Atualização efetivada na base de dados.");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-    //Parte 4
-    public void compromisso(){
-        selecionadoCompromisso = new TbCompromisso();
-        dscCompromisso = "";
-        TbAssuntoDAO tbAssuntoDAO = new TbAssuntoDAO();
-        tbAssuntos = tbAssuntoDAO.consultarTodos();
-        TaParticipantesDAO taParticipantesDAO = new TaParticipantesDAO();
-        taParticipantess = taParticipantesDAO.consultarTodos();
-    }
-    public void compromissoNovo(){
-        HttpSession sessaoAssunto = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        TbAssunto assunto = (TbAssunto) sessaoAssunto.getAttribute("assunto");
-        setSelecionadoCompromisso(new TbCompromisso());
-        getSelecionadoCompromisso().setIdtCompromisso(0);
-        getSelecionadoCompromisso().getTbAssunto().setIdtAssunto(assunto.getIdtAssunto());
-    }
 
     public void novo() {
         setSelecionado(new TbReuniao());
@@ -211,22 +121,9 @@ public class Reuniao2MB {
         FacesContext.getCurrentInstance().addMessage(null, msg);
         HttpSession sessaoReuniao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         sessaoReuniao.setAttribute("reuniao", retorno);
-        filtrar();
+        participantesNovo();
     }
     
-    
-    public void onReuniaoChange(){
-        HttpSession sessaoReuniao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        TbReuniao reuniaoo = (TbReuniao) sessaoReuniao.getAttribute("reuniao");
-         //if(idtReuniao !=null && !idtReuniao.equals("")){
-            TbReuniaoDAO dao = new TbReuniaoDAO();
-            setTbReunioes(dao.consultarPorNmeLocal(reuniaoo.getNmeLocalReuniao()));
-         //}else{
-            //TbReuniaoDAO dao = new TbReuniaoDAO();
-            //setTbReunioes(null);
-        //}
-    }
-
     public void excluir() {
         TbReuniaoDAO dao = new TbReuniaoDAO();
         if (getSelecionado().getIdtReuniao() != 0) {
@@ -241,18 +138,155 @@ public class Reuniao2MB {
         filtrar();
     }
     
-        /**
-     * @return the reuniao
-     */
-    public String getReuniao() {
-        return reuniao;
+       //Parte 1
+    public void participantes(){
+        selecionadoParticipantes = new TaParticipantes();
+       
+        TbReuniaoDAO dao = new TbReuniaoDAO();
+        tbReunioes = dao.consultarTodos();
+        
+        TbFuncaoDAO tbFuncaoDAO = new TbFuncaoDAO();
+        tbFuncoes = tbFuncaoDAO.consultarTodos();
+        
+        TaFuncionarioDAO taFuncionarioDAO = new TaFuncionarioDAO();
+        taFuncionarios = taFuncionarioDAO.consultarTodos();
+
+    }
+    
+    public void participantesNovo(){
+        setSelecionadoParticipantes(new TaParticipantes());
+        getSelecionadoParticipantes().setIdtParticipantes(0);
+
+        
+    }
+    public void participantesSalvar(){
+        HttpSession sessaoReuniao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        TbReuniao reuniaoo = (TbReuniao) sessaoReuniao.getAttribute("reuniao");
+        TbReuniaoDAO tbReuniaoDAO = new TbReuniaoDAO();
+        getSelecionadoParticipantes().setTbReuniao(tbReuniaoDAO.consultarPorIdt(reuniaoo.getIdtReuniao()));
+        TaParticipantesDAO dao = new TaParticipantesDAO();
+        TaParticipantes retorno = new TaParticipantes();
+
+        if (getSelecionadoParticipantes().getIdtParticipantes()== 0) {
+            getSelecionadoParticipantes().setIdtParticipantes(null);
+            retorno = dao.incluir(getSelecionadoParticipantes());
+        } else {
+            retorno = dao.juntar(getSelecionadoParticipantes());
+        }
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Resultado da Gravação", "Atualização efetivada na base de dados.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        HttpSession sessaoParticipantes = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        sessaoParticipantes.setAttribute("participantes", retorno);
+        filtrar();
     }
 
-    /**
-     * @param reuniao the reuniao to set
-     */
-    public void setReuniao(String reuniao) {
-        this.reuniao = reuniao;
+    
+    //Parte 2
+    public void pauta(){
+        selecionadoPauta = new TbPauta();
+        txtPauta = "";
+        TbReuniaoDAO dao = new TbReuniaoDAO();
+        tbReunioes = dao.consultarTodos();
+    }
+    
+    public void pautaNova(){
+        setSelecionadoPauta(new TbPauta());
+        getSelecionadoPauta().setIdtPauta(0);
+    }
+    public void pautaSalvar(){
+        HttpSession sessaoReuniao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        TbReuniao reuniaoo = (TbReuniao) sessaoReuniao.getAttribute("reuniao");
+        TbReuniaoDAO tbReuniaoDAO = new TbReuniaoDAO();
+        getSelecionadoPauta().setTbReuniao(tbReuniaoDAO.consultarPorIdt(reuniaoo.getIdtReuniao()));
+        TbPautaDAO dao = new TbPautaDAO();
+        TbPauta retorno = new TbPauta();
+        if (getSelecionadoPauta().getIdtPauta() == 0) {
+            getSelecionadoPauta().setIdtPauta(null);
+            retorno = dao.incluir(getSelecionadoPauta());
+        } else {
+            retorno = dao.juntar(getSelecionadoPauta());
+        }
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Resultado da Gravação", "Atualização efetivada na base de dados.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        HttpSession sessaoPauta = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        sessaoPauta.setAttribute("pauta", retorno);
+        filtrar();
+    }
+    
+    //Parte 3
+    public void assunto(){
+        selecionadoAssunto = new TbAssunto();
+        txtAssunto = "";
+        idtPautaPar = 0;
+        TbReuniaoDAO dao = new TbReuniaoDAO();
+        tbReunioes = dao.consultarTodos();
+        TbPautaDAO tbPautaDAO = new TbPautaDAO();
+        tbPautas = tbPautaDAO.consultarTodos();
+    }
+    public void assuntoNovo(){
+        setSelecionadoAssunto(new TbAssunto());
+        getSelecionadoAssunto().setIdtAssunto(0);
+
+    }
+    public void assuntoSalvar(){
+        HttpSession sessaoReuniao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        TbReuniao reuniaoo = (TbReuniao) sessaoReuniao.getAttribute("reuniao");
+        TbReuniaoDAO tbReuniaoDAO = new TbReuniaoDAO();
+        getSelecionadoAssunto().setTbReuniao(tbReuniaoDAO.consultarPorIdt(reuniaoo.getIdtReuniao()));
+        
+        HttpSession sessaoPauta = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        TbPauta pauta = (TbPauta) sessaoPauta.getAttribute("pauta");
+        TbPautaDAO tbPautaDAO = new TbPautaDAO();
+        getSelecionadoAssunto().setTbPauta(tbPautaDAO.consultarPorIdt(pauta.getIdtPauta()));
+        
+        TbAssuntoDAO dao = new TbAssuntoDAO();
+        TbAssunto assunto = new TbAssunto();
+        if (getSelecionadoAssunto().getIdtAssunto() == 0) {
+            getSelecionadoAssunto().setIdtAssunto(null);
+            assunto = dao.incluir(getSelecionadoAssunto());
+        } else {
+            assunto = dao.juntar(getSelecionadoAssunto());
+        }
+        
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Resultado da Gravação", "Atualização efetivada na base de dados.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        HttpSession sessaoAssunto = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        sessaoPauta.setAttribute("assunto", assunto);
+        filtrar();
+    }
+    //Parte 4
+    public void compromisso(){
+        selecionadoCompromisso = new TbCompromisso();
+        dscCompromisso = "";
+        TbAssuntoDAO tbAssuntoDAO = new TbAssuntoDAO();
+        tbAssuntos = tbAssuntoDAO.consultarTodos();
+        TaParticipantesDAO taParticipantesDAO = new TaParticipantesDAO();
+        taParticipantess = taParticipantesDAO.consultarTodos();
+    }
+    public void compromissoNovo(){
+        setSelecionadoCompromisso(new TbCompromisso());
+        getSelecionadoCompromisso().setIdtCompromisso(0);
+    }
+    public void compromissoSalvar(){
+        HttpSession sessaoAssunto = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        TbAssunto assunto = (TbAssunto) sessaoAssunto.getAttribute("assunto");
+        TbAssuntoDAO tbAssuntoDAO = new TbAssuntoDAO();
+        getSelecionadoCompromisso().setTbAssunto(tbAssuntoDAO.consultarPorIdt(assunto.getIdtAssunto()));
+        
+        HttpSession sessaoParticipantes = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        TaParticipantes participante = (TaParticipantes) sessaoParticipantes.getAttribute("participantes");
+        TaParticipantesDAO taParticipantesDAO = new TaParticipantesDAO();
+        getSelecionadoCompromisso().setTaParticipantes(taParticipantesDAO.consultarPorIdt(participante.getIdtParticipantes()));
+        
+        TbCompromissoDAO dao = new TbCompromissoDAO();
+        if (getSelecionadoCompromisso().getIdtCompromisso() == 0) {
+            getSelecionadoCompromisso().setIdtCompromisso(null);
+            dao.incluir(getSelecionadoCompromisso());
+        } else {
+            dao.juntar(getSelecionadoCompromisso());
+        }
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Resultado da Gravação", "Atualização efetivada na base de dados.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     /**
