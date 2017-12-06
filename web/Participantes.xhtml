@@ -75,7 +75,7 @@
                         <p:column>
                             <h:outputText value="Reuniao: " />  
                         </p:column>
-                        <p:selectOneMenu id="codSetor" value="#{participantesMB.selecionado.tbReuniao}" style="width:150px" converter="reuniaoCV">
+                        <p:selectOneMenu id="codReuniao" value="#{participantesMB.selecionado.tbReuniao}" style="width:150px" converter="reuniaoCV">
                             <f:selectItems value="#{participantesMB.tbReunioes}" var="i" itemLabel="#{i.nmeLocalReuniao}" itemValue="#{i}"/>
                         </p:selectOneMenu>
                         <p:column>

@@ -17,7 +17,7 @@ public class TaParticipantesDAO extends BaseDAO<TaParticipantes> {
         List<TaParticipantes> lista;
         Query qy = hib.createQuery("SELECT obj FROM TaParticipantes obj "
                 + "WHERE (0=? OR tbReuniao.idtReuniao=?)"
-                + "ORDER BY tbReuniao.nmeLocalReuniao");
+                + "ORDER BY tbReuniao.idtReuniao");
         qy.setInteger(0, idtReuniao);
         qy.setInteger(1, idtReuniao);
         lista = qy.list();

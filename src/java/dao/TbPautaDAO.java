@@ -18,7 +18,7 @@ public class TbPautaDAO extends BaseDAO<TbPauta> {
         List<TbPauta> lista;
         Query qy = hib.createQuery("SELECT obj FROM TbPauta obj "
                 + "WHERE (0=? OR tbReuniao.idtReuniao=?) AND txtPauta LIKE ?"
-                + "ORDER BY tbReuniao.nmeLocalReuniao, txtPauta");
+                + "ORDER BY tbReuniao.idtReuniao");
         qy.setInteger(0, idtReuniao);
         qy.setInteger(1, idtReuniao);
         qy.setString(2, "%" + txtPauta + "%");

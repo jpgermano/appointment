@@ -83,7 +83,6 @@ public class Reuniao2MB {
         tbProjetos = tbProjetoDAO.consultarTodos();
         
         filtrar();
-        participantes();
         
     }
     public void pesquisarTodos(){
@@ -288,7 +287,13 @@ public class Reuniao2MB {
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Resultado da Gravação", "Atualização efetivada na base de dados.");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-
+    
+    public void editarParticipantes(){
+        TbReuniaoDAO tbReuniaoDAO = new TbReuniaoDAO();
+        getSelecionadoParticipantes().setTbReuniao(tbReuniaoDAO.consultarPorIdt(idtReuniao));
+        getSelecionadoParticipantes().setTbReuniao(tbReuniaoDAO.consultarPorIdt(idtReuniao));
+    }
+    
     /**
      * @return the selecionado
      */

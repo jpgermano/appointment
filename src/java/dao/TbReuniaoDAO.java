@@ -25,7 +25,7 @@ public class TbReuniaoDAO extends BaseDAO<TbReuniao> {
     
      public List<TbReuniao> consultarPorData(Date data) {
         List<TbReuniao> lista;
-        Query qy = hib.createQuery("SELECT obj FROM TbReuniao obj WHERE dta_reuniao = ?");
+        Query qy = hib.createQuery("SELECT obj FROM TbReuniao obj WHERE DATE(dta_reuniao) = ?");
         qy.setDate(0,data);
         lista = qy.list();
         return lista;

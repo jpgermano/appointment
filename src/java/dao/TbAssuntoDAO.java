@@ -18,7 +18,7 @@ public class TbAssuntoDAO extends BaseDAO<TbAssunto> {
         List<TbAssunto> lista;
         Query qy = hib.createQuery("SELECT obj FROM TbAssunto obj "
                 + "WHERE (0=? OR tbReuniao.idtReuniao=?) AND txtAssunto LIKE ?"
-                + "ORDER BY tbReuniao.nmeLocalReuniao, txtAssunto");
+                + "ORDER BY tbReuniao.idtReuniao, txtAssunto");
         qy.setInteger(0, idtReuniao);
         qy.setInteger(1, idtReuniao);
         qy.setString(2, "%" + txtAssunto + "%");
