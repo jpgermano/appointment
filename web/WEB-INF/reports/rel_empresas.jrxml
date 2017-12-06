@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ata_reuniao" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dc50aa76-c6ed-4620-80b3-0297b144ee79">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFE4C4">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE2BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="a00d692d-7bb7-47d6-bf6a-08df72a449cd"/>
+	<parameter name="nme_empresa" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{nme_empresa}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="end_empresa" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{end_empresa}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nme_area_empresa" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{nme_area_empresa}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tel_empresa" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{tel_empresa}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="eml_empresa" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{eml_empresa}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT nme_empresa, end_empresa, nme_area_empresa, tel_empresa, eml_empresa FROM tb_empresa;]]>
+	</queryString>
+	<field name="nme_empresa" class="java.lang.String"/>
+	<field name="end_empresa" class="java.lang.String"/>
+	<field name="nme_area_empresa" class="java.lang.String"/>
+	<field name="tel_empresa" class="java.lang.String"/>
+	<field name="eml_empresa" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="101" splitType="Stretch">
+			<staticText>
+				<reportElement x="149" y="13" width="237" height="54" uuid="484d7b3d-11e6-459b-ab88-227f4d3a33bb"/>
+				<textElement textAlignment="Center">
+					<font size="36"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="0" y="0" width="555" height="83" forecolor="#000000" backcolor="#CCCCCC" uuid="e3ebaeff-0a66-4a4b-9197-041c7fcb8c6b"/>
+				<box topPadding="0" leftPadding="0">
+					<pen lineWidth="1.5" lineStyle="Solid" lineColor="#660099"/>
+					<topPen lineWidth="1.5" lineStyle="Solid" lineColor="#660099"/>
+					<leftPen lineWidth="1.5" lineStyle="Solid" lineColor="#660099"/>
+					<bottomPen lineWidth="1.5" lineStyle="Solid" lineColor="#660099"/>
+					<rightPen lineWidth="1.5" lineStyle="Solid" lineColor="#660099"/>
+				</box>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="455" y="13" width="100" height="20" uuid="647c4cad-ae31-4468-b61c-4b9199eaced4"/>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="149" y="13" width="237" height="54" uuid="844b5f21-1dca-4542-97fe-30e438182a0d"/>
+					<textElement textAlignment="Center">
+						<font fontName="Calibri" size="36"/>
+					</textElement>
+					<text><![CDATA[Appointment]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="101" height="21" uuid="8ea732ad-df7c-49c0-9871-6096415b4222"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empresa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="186" y="10" width="100" height="21" uuid="45064713-74ae-4ccb-90bc-13431635245e"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Area]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="10" width="118" height="21" uuid="ba75f287-e020-4146-810c-be523dc2326d"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="10" width="85" height="21" uuid="a04905b7-01aa-4a80-a390-662b6cb11cdf"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Endereco]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="404" y="10" width="151" height="21" uuid="cc296c88-d212-43ba-b5fa-ae3d107cac08"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="101" height="28" uuid="2ff5b3a9-c132-4259-9f7a-58fd413151e1"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nme_empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="0" width="85" height="20" uuid="90ac981f-58a5-4868-a6a1-7daa3e787c84"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{end_empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="186" y="0" width="100" height="20" uuid="d271b936-90ca-4acf-b45f-8412c4a02dea"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nme_area_empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="286" y="0" width="118" height="20" uuid="c812741b-ba68-450b-8c11-18f3bce446c9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tel_empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="404" y="0" width="151" height="20" uuid="7b582f10-ac30-4695-bff7-e27a8c6b9cbe"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{eml_empresa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="34" width="80" height="20" uuid="e5f990fe-6745-4c43-a17d-d424d5cf1cf8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="34" width="40" height="20" uuid="659d003d-1725-4ce8-b822-c4367c3b9ef9"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="43" splitType="Stretch"/>
+	</summary>
+</jasperReport>

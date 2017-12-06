@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ata_reuniao" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dc50aa76-c6ed-4620-80b3-0297b144ee79">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFE4C4">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE2BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="a00d692d-7bb7-47d6-bf6a-08df72a449cd"/>
+	<parameter name="nme_local_reuniao" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{nme_local_reuniao}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ord_pauta" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{ord_pauta}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="txt_pauta" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{txt_pauta}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="txt_obj_reuniao" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{txt_obj_reuniao}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dta_reuniao" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{dta_reuniao}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dta_prox_reuniao" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{dta_prox_reuniao}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="pTxt" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT ord_pauta, txt_pauta, nme_local_reuniao , txt_obj_reuniao,
+dta_reuniao, dta_prox_reuniao FROM tb_pauta JOIN tb_reuniao on
+cod_reuniao=idt_reuniao WHERE txt_pauta LIKE CONCAT ('%', $P{pTxt}, '%') ORDER BY txt_pauta;]]>
+	</queryString>
+	<field name="nme_local_reuniao" class="java.lang.String"/>
+	<field name="ord_pauta" class="java.lang.String"/>
+	<field name="txt_pauta" class="java.lang.String"/>
+	<field name="txt_obj_reuniao" class="java.lang.String"/>
+	<field name="dta_reuniao" class="java.lang.String"/>
+	<field name="dta_prox_reuniao" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="101" splitType="Stretch">
+			<staticText>
+				<reportElement x="149" y="13" width="237" height="54" uuid="484d7b3d-11e6-459b-ab88-227f4d3a33bb"/>
+				<textElement textAlignment="Center">
+					<font size="36"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="0" y="0" width="555" height="83" forecolor="#000000" backcolor="#CCCCCC" uuid="e3ebaeff-0a66-4a4b-9197-041c7fcb8c6b"/>
+				<box topPadding="0" leftPadding="0">
+					<pen lineWidth="1.5" lineStyle="Double" lineColor="#00CCCC"/>
+					<topPen lineWidth="1.5" lineStyle="Double" lineColor="#00CCCC"/>
+					<leftPen lineWidth="1.5" lineStyle="Double" lineColor="#00CCCC"/>
+					<bottomPen lineWidth="1.5" lineStyle="Double" lineColor="#00CCCC"/>
+					<rightPen lineWidth="1.5" lineStyle="Double" lineColor="#00CCCC"/>
+				</box>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="455" y="13" width="100" height="20" uuid="647c4cad-ae31-4468-b61c-4b9199eaced4"/>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="149" y="13" width="237" height="54" uuid="844b5f21-1dca-4542-97fe-30e438182a0d"/>
+					<textElement textAlignment="Center">
+						<font fontName="Calibri" size="36"/>
+					</textElement>
+					<text><![CDATA[Appointment]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="81" height="21" uuid="8ea732ad-df7c-49c0-9871-6096415b4222"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Local]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="10" width="127" height="21" uuid="45064713-74ae-4ccb-90bc-13431635245e"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pauta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="10" width="117" height="35" uuid="ba75f287-e020-4146-810c-be523dc2326d"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Objetivo da Reuniao]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="10" width="59" height="35" uuid="a04905b7-01aa-4a80-a390-662b6cb11cdf"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ordem da Pauta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="386" y="10" width="79" height="35" uuid="cc296c88-d212-43ba-b5fa-ae3d107cac08"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da Reuniao]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="10" width="90" height="35" uuid="f170d947-2954-4b56-901f-96198e8d56c3"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proxima da Reuniao]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="47" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="80" height="26" uuid="fa63db50-0375-4e82-ae92-afc1d24701e7"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nme_local_reuniao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="0" width="127" height="36" uuid="ba44e556-bc82-4a81-9b1c-05f1ba622ebc"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{txt_pauta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="386" y="0" width="79" height="36" uuid="eaca765e-2606-40b0-b018-7fb834ddb874"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{dta_reuniao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="465" y="0" width="90" height="36" uuid="15b3e487-e147-4c94-a9e5-9967952087d5"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{dta_prox_reuniao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="81" y="0" width="59" height="26" uuid="32399717-e416-40e9-8b0f-aa766e856bb6"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ord_pauta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="267" y="0" width="117" height="36" uuid="eaa98c7f-a866-4f40-bb41-302dbc23828d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{txt_obj_reuniao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="34" width="80" height="20" uuid="e5f990fe-6745-4c43-a17d-d424d5cf1cf8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="34" width="40" height="20" uuid="659d003d-1725-4ce8-b822-c4367c3b9ef9"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="43" splitType="Stretch"/>
+	</summary>
+</jasperReport>

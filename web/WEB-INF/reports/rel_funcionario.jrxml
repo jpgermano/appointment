@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ata_reuniao" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dc50aa76-c6ed-4620-80b3-0297b144ee79">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFE4C4">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE2BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="a00d692d-7bb7-47d6-bf6a-08df72a449cd"/>
+	<parameter name="nme_empresa" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{nme_empresa}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nme_setor" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{nme_setor}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nme_pessoa" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{nme_pessoa}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="pNme" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT nme_pessoa, tel_pessoa, eml_pessoa, end_pessoa, tb_cargo.nme_cargo,
+nme_setor, nme_empresa FROM ta_funcionario JOIN tb_empresa JOIN tb_setor JOIN tb_pessoa JOIN tb_cargo on
+cod_empresa=idt_empresa and idt_funcionario=idt_pessoa and cod_setor=idt_setor
+and cod_cargo=idt_cargo WHERE nme_pessoa LIKE CONCAT ('%', $P{pNme}, '%') ORDER BY nme_pessoa;]]>
+	</queryString>
+	<field name="nme_empresa" class="java.lang.String"/>
+	<field name="nme_setor" class="java.lang.String"/>
+	<field name="nme_pessoa" class="java.lang.String"/>
+	<field name="nme_cargo" class="java.lang.String"/>
+	<field name="tel_pessoa" class="java.lang.String"/>
+	<field name="eml_pessoa" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="101" splitType="Stretch">
+			<staticText>
+				<reportElement x="149" y="13" width="237" height="54" uuid="484d7b3d-11e6-459b-ab88-227f4d3a33bb"/>
+				<textElement textAlignment="Center">
+					<font size="36"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="0" y="0" width="555" height="83" forecolor="#000000" backcolor="#CCCCCC" uuid="e3ebaeff-0a66-4a4b-9197-041c7fcb8c6b"/>
+				<box topPadding="0" leftPadding="0">
+					<pen lineWidth="1.5" lineStyle="Solid" lineColor="#FF9900"/>
+					<topPen lineWidth="1.5" lineStyle="Solid" lineColor="#FF9900"/>
+					<leftPen lineWidth="1.5" lineStyle="Solid" lineColor="#FF9900"/>
+					<bottomPen lineWidth="1.5" lineStyle="Solid" lineColor="#FF9900"/>
+					<rightPen lineWidth="1.5" lineStyle="Solid" lineColor="#FF9900"/>
+				</box>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="455" y="13" width="100" height="20" uuid="647c4cad-ae31-4468-b61c-4b9199eaced4"/>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="149" y="13" width="237" height="54" uuid="844b5f21-1dca-4542-97fe-30e438182a0d"/>
+					<textElement textAlignment="Center">
+						<font fontName="Calibri" size="36"/>
+					</textElement>
+					<text><![CDATA[Appointment]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="81" height="21" uuid="8ea732ad-df7c-49c0-9871-6096415b4222"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empresa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="149" y="10" width="100" height="21" uuid="45064713-74ae-4ccb-90bc-13431635245e"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Funcionario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="10" width="118" height="21" uuid="ba75f287-e020-4146-810c-be523dc2326d"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="10" width="68" height="21" uuid="a04905b7-01aa-4a80-a390-662b6cb11cdf"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Setor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="362" y="10" width="93" height="21" uuid="a381bff4-1f42-4951-8687-672b36de43e5"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="10" width="100" height="21" uuid="cc296c88-d212-43ba-b5fa-ae3d107cac08"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="81" height="28" uuid="2ff5b3a9-c132-4259-9f7a-58fd413151e1"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nme_empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="81" y="0" width="68" height="20" uuid="3005392c-47dc-4f38-9b80-a724b578f4b4"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nme_setor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="149" y="0" width="112" height="28" uuid="470f4c8f-ec73-41d6-97bb-624b8c15be46"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nme_pessoa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="244" y="0" width="118" height="28" uuid="9beb7a32-508a-45fb-99da-f6e4f9a20fbf"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nme_cargo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="362" y="0" width="93" height="20" uuid="8133c098-f6a4-48af-8883-81ba2d8d3aac"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tel_pessoa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="441" y="0" width="114" height="20" uuid="808dd2d2-25a9-4173-b111-04d588931fba"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{eml_pessoa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="34" width="80" height="20" uuid="e5f990fe-6745-4c43-a17d-d424d5cf1cf8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="34" width="40" height="20" uuid="659d003d-1725-4ce8-b822-c4367c3b9ef9"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="43" splitType="Stretch"/>
+	</summary>
+</jasperReport>
