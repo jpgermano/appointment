@@ -56,8 +56,7 @@
                     <p:column headerText="Projeto" style="width:300px">  
                         <h:outputText value="#{reg.tbProjeto.nmeProjeto}" />  
                     </p:column>
-                    
-                    <p:column headerText="Ver outros" style="width:800px">  
+                             <p:column headerText="Ver outros" style="width:800px">  
                         <p:panelGrid columns="4">
                             <p:column>
                                 <p:commandButton id="btnCompromisso" update=":frmEditarCompromisso:pngEditarCompromisso" oncomplete="PF('dlgEditarCompromissoView').show()" icon="ui-icon-pencil" value="Compromisso">  
@@ -80,7 +79,8 @@
                                 </p:commandButton>  
                             </p:column>
                         </p:panelGrid>  
-                    </p:column> 
+                    </p:column>
+					    
                     <p:column headerText="Operacao" style="width:400px">  
                         <p:panelGrid columns="2">  
                             <p:column>
@@ -145,13 +145,13 @@
                         <p:column>
                             <h:outputText value="Funcionario: " />  
                         </p:column>
-                        <p:selectOneMenu id="codCargo" value="#{reuniao2MB.selecionadoParticipantes.taFuncionario}" style="width:150px" converter="funcionarioCV">
+                        <p:selectOneMenu id="codFuncionario" value="#{reuniao2MB.selecionadoParticipantes.taFuncionario}" style="width:150px" converter="funcionarioCV">
                             <f:selectItems value="#{reuniao2MB.taFuncionarios}" var="u" itemLabel="#{u.tbPessoa.nmePessoa}" itemValue="#{u}"/>
                         </p:selectOneMenu>
                         <p:column>
                             <h:outputText value="Funcao: " />  
                         </p:column>
-                        <p:selectOneMenu id="codEmpresa" value="#{reuniao2MB.selecionadoParticipantes.tbFuncao}" style="width:150px" converter="funcaoCV">
+                        <p:selectOneMenu id="codFuncao" value="#{reuniao2MB.selecionadoParticipantes.tbFuncao}" style="width:150px" converter="funcaoCV">
                             <f:selectItems value="#{reuniao2MB.tbFuncoes}" var="v" itemLabel="#{v.nmeFuncao}" itemValue="#{v}"/>
                         </p:selectOneMenu>
                         <p:column></p:column>
@@ -343,7 +343,7 @@
                             <f:selectItems value="#{reuniao2MB.tbProjetos}" var="q" itemLabel="#{q.nmeProjeto}" itemValue="#{q}"/>
                         </p:selectOneMenu>
                         <p:column>
-                            <p:commandButton id="btnSalvar" update=":frmNovo:pngNovo, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{reuniao2MB.salvar}" ajax="true"/>  
+                            <p:commandButton id="btnSalvar" update=":frmEditar:pngEditar, :frmConsulta:dtbConsulta, :frmConsulta:msgs" icon="ui-icon-disk" value="Salvar"  actionListener="#{reuniao2MB.salvar}" ajax="true"/>  
                         </p:column>
                         <p:column>
                             <p:commandButton id="btnFechar" value="Fechar" icon="ui-icon-close" onclick="dlgEditarView.hide()"/>  

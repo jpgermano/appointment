@@ -83,6 +83,7 @@ public class Reuniao2MB {
         tbProjetos = tbProjetoDAO.consultarTodos();
         
         filtrar();
+        participantes();
         
     }
     public void pesquisarTodos(){
